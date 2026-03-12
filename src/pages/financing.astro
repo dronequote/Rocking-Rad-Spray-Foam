@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import CTASection from '../components/CTASection.astro';
 
-const title = 'Financing Options | Rocking Rad';
+const title = 'Spray Foam Insulation Financing | 0% Options | Rocking Rad';
 const description = 'Make spray foam insulation affordable with 0% financing options. Learn how to save on your insulation project.';
 
 const financingSteps = [
@@ -13,7 +13,7 @@ const financingSteps = [
 ];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Financing', url: '/financing' }]}>
   <HeroSection
     title="Make Spray Foam Affordable"
     subtitle="With 0% financing available, spray foam insulation is more accessible than you think."

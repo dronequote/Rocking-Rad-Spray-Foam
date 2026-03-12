@@ -3,8 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import CTASection from '../components/CTASection.astro';
 
-const title = 'Project Gallery | Rocking Rad Spray Foam';
+const title = 'Spray Foam Insulation Gallery | Oklahoma Projects | Rocking Rad';
 const description = 'See our spray foam insulation work across Oklahoma. Attic, metal building, pole barn, commercial, and residential projects. Before and after photos.';
+
+const galleryTypes = ['All', 'Metal Building', 'Residential', 'Commercial', 'Specialty', 'On the Job', 'Application Detail', 'Finishing'];
 
 const projects = [
   {
@@ -69,6 +71,7 @@ const projects = [
     foam: 'Closed Cell',
     description: 'Close-up of a spray foam gun applying closed cell insulation — precision application for consistent coverage.',
     image: '/images/spray-foam-gun-applying-closed-cell-insulation-closeup.jpg',
+    objectPosition: 'top',
   },
   {
     title: 'Installer Spraying from Lift — Metal Building',
@@ -83,6 +86,7 @@ const projects = [
     foam: 'In Progress',
     description: 'Spray foam insulation contractor spraying a metal building wall in Oklahoma — our team in action.',
     image: '/images/spray-foam-insulation-contractor-spraying-metal-building-wall-oklahoma.jpg',
+    objectPosition: 'top',
   },
   {
     title: 'Metal Building Interior — Insulation Completed',
@@ -111,6 +115,7 @@ const projects = [
     foam: 'Safety',
     description: 'Spray foam insulation technician in full safety gear on an Oklahoma job site — safety is always our priority.',
     image: '/images/spray-foam-insulation-technician-full-safety-gear-oklahoma.jpg',
+    objectPosition: 'top',
   },
   {
     title: 'Wall Application Detail — Spray Foam',
@@ -118,6 +123,7 @@ const projects = [
     foam: 'In Progress',
     description: 'Detailed view of spray foam insulation being applied to a wall in Oklahoma — even coverage for maximum performance.',
     image: '/images/spray-foam-insulation-wall-application-detail-oklahoma.jpg',
+    objectPosition: 'top',
   },
   {
     title: 'Technician Trimming Insulation on Scaffold',
@@ -125,11 +131,12 @@ const projects = [
     foam: 'Finishing',
     description: 'Spray foam technician trimming insulation on a scaffold for a clean, professional finish.',
     image: '/images/spray-foam-technician-trimming-insulation-on-scaffold.jpg',
+    objectPosition: 'top',
   },
 ];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Gallery', url: '/gallery' }]}>
   <HeroSection
     title="Our Work Speaks for Itself"
     subtitle="Browse real spray foam insulation projects from across Oklahoma. Every project completed to the highest standards."
@@ -140,9 +147,26 @@ const projects = [
 
   <section class="section-padding bg-white">
     <div class="container-narrow">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Gallery Filters -->
+      <div class="flex flex-wrap gap-2 mb-8" id="gallery-filters">
+        {galleryTypes.map(type => (
+          <button
+            class:list={[
+              'px-4 py-2 rounded-full text-sm font-medium border transition-colors',
+              type === 'All'
+                ? 'border-brand-blue bg-brand-blue text-white'
+                : 'border-neutral-200 text-neutral-600 hover:border-brand-blue hover:text-brand-blue',
+            ]}
+            data-filter={type === 'All' ? 'all' : type}
+          >
+            {type}
+          </button>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
         {projects.map((project, i) => (
-          <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-neutral-200 hover:shadow-md transition-shadow">
+          <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-neutral-200 hover:shadow-md transition-shadow" data-type={project.type}>
             <button
               type="button"
               class="gallery-trigger w-full cursor-pointer"
@@ -158,7 +182,7 @@ const projects = [
                 width="600"
                 height="400"
                 loading="lazy"
-                class="w-full h-56 object-cover hover:scale-105 transition-transform duration-300"
+                class={`w-full h-56 object-cover hover:scale-105 transition-transform duration-300${project.objectPosition ? ` object-${project.objectPosition}` : ''}`}
               />
             </button>
             <div class="p-5">
@@ -201,6 +225,29 @@ const projects = [
 </BaseLayout>
 
 <script>
+  // Gallery filtering
+  const filters = document.getElementById('gallery-filters');
+  const grid = document.getElementById('gallery-grid');
+  if (filters && grid) {
+    const buttons = filters.querySelectorAll('button');
+    const cards = grid.querySelectorAll<HTMLElement>('[data-type]');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        buttons.forEach(b => {
+          b.classList.remove('border-brand-blue', 'bg-brand-blue', 'text-white');
+          b.classList.add('border-neutral-200', 'text-neutral-600');
+        });
+        btn.classList.remove('border-neutral-200', 'text-neutral-600');
+        btn.classList.add('border-brand-blue', 'bg-brand-blue', 'text-white');
+        cards.forEach(card => {
+          card.style.display = (filter === 'all' || card.getAttribute('data-type') === filter) ? '' : 'none';
+        });
+      });
+    });
+  }
+
+  // Lightbox
   const lightbox = document.getElementById('lightbox')!;
   const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
   const lbCaption = document.getElementById('lightbox-caption')!;

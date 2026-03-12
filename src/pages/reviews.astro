@@ -5,8 +5,41 @@ import CTASection from '../components/CTASection.astro';
 import { testimonials } from '../data/testimonials';
 import { company } from '../data/company';
 
-const title = 'Customer Reviews | Rocking Rad Spray Foam';
+const title = '5-Star Customer Reviews | Rocking Rad Spray Foam Oklahoma';
 const description = 'Read what Oklahoma customers say about Rocking Rad Spray Foam. 5-star Google rating, 94% Facebook recommendation rate. Real reviews from real customers.';
+
+const siteURL = 'https://rockingradsprayfoam.com';
+
+const reviewSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${siteURL}/#organization`,
+  name: 'Rocking Rad Spray Foam LLC',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: String(testimonials.length),
+    bestRating: '5',
+    worstRating: '1',
+  },
+  review: testimonials.map((r) => ({
+    '@type': 'Review',
+    author: { '@type': 'Person', name: r.name },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: String(r.rating),
+      bestRating: '5',
+      worstRating: '1',
+    },
+    reviewBody: r.text,
+    ...(r.location && { locationCreated: { '@type': 'Place', name: r.location } }),
+  })),
+};
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Reviews', url: '/reviews' },
+];
 
 const reviewSources = [
   { name: 'Google', rating: '5.0', icon: 'G' },
@@ -15,7 +48,7 @@ const reviewSources = [
 ];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} schema={reviewSchema} breadcrumbs={breadcrumbs}>
   <HeroSection
     title="What Our Customers Say"
     subtitle="We let our work and our customers speak for us. Here's what they have to say."

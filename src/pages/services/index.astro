@@ -5,7 +5,7 @@ import ServiceCard from '../../components/ServiceCard.astro';
 import CTASection from '../../components/CTASection.astro';
 import { services } from '../../data/services';
 
-const title = 'Spray Foam Insulation Services | Oklahoma';
+const title = 'Spray Foam Insulation Services Oklahoma | Rocking Rad';
 const description = 'Professional spray foam insulation services in Oklahoma. Open cell, closed cell, attic, metal building & commercial insulation. Free estimates. (580) 320-5620';
 
 const processSteps = [
@@ -16,7 +16,7 @@ const processSteps = [
 ];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Services', url: '/services' }]}>
   <HeroSection
     title="Professional Spray Foam Services"
     subtitle="From residential attics to commercial metal buildings, we deliver the right insulation solution for every project in Oklahoma."

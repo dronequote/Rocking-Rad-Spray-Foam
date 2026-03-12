@@ -11,7 +11,7 @@ const description = 'Rocking Rad Spray Foam serves all of Oklahoma. Ada, OKC, No
 const allZipCodes = cities.flatMap((city) => city.zipCodes);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Service Areas', url: '/service-areas' }]}>
   <HeroSection
     title="Serving Oklahoma Statewide"
     subtitle="From Ada to Oklahoma City, Tulsa to Durant — we bring professional spray foam insulation to communities across the state."

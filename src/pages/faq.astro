@@ -4,7 +4,7 @@ import HeroSection from '../components/HeroSection.astro';
 import CTASection from '../components/CTASection.astro';
 import { faqs } from '../data/faq';
 
-const title = 'FAQ | Spray Foam Insulation Questions';
+const title = 'Spray Foam Insulation FAQ | Oklahoma | Rocking Rad';
 const description = 'Get answers to common spray foam insulation questions. Cost, process, types, financing, and more. Rocking Rad Spray Foam — Oklahoma\'s trusted contractor.';
 
 const categories = ['All', 'General', 'Cost', 'Process', 'Technical'];
@@ -20,7 +20,7 @@ const faqSchema = {
 };
 ---
 
-<BaseLayout title={title} description={description} schema={faqSchema}>
+<BaseLayout title={title} description={description} schema={faqSchema} breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'FAQ', url: '/faq' }]}>
   <HeroSection
     title="Frequently Asked Questions"
     subtitle="Everything you need to know about spray foam insulation, our process, costs, and more."

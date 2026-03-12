@@ -5,7 +5,7 @@ import CTASection from '../components/CTASection.astro';
 import QuoteForm from '../components/QuoteForm.tsx';
 import { company } from '../data/company';
 
-const title = 'Contact Us & Free Estimate | Rocking Rad';
+const title = 'Free Spray Foam Estimate | Contact Rocking Rad Oklahoma';
 const description = 'Get a free spray foam insulation estimate from Rocking Rad Spray Foam. Call (580) 320-5620 or fill out our form. Serving all of Oklahoma.';
 
 const steps = [
@@ -16,7 +16,7 @@ const steps = [
 ];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Contact', url: '/contact' }]}>
   <HeroSection
     title="Get Your Free Estimate"
     subtitle="Tell us about your project and we'll provide a no-obligation quote. Most estimates delivered within 24 hours."

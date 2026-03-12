@@ -24,7 +24,7 @@ const notFitItems = [
 ];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'About', url: '/about' }]}>
   <HeroSection
     title="Oklahoma Owned. Oklahoma Proud."
     subtitle="We're a family-run spray foam insulation company built on honest work, premium materials, and treating every home like our own."
@@ -84,7 +84,7 @@ const notFitItems = [
             width="600"
             height="400"
             loading="lazy"
-            class="w-full h-64 object-cover"
+            class="w-full h-64 object-cover object-top"
           />
           <div class="p-4 bg-neutral-50">
             <p class="font-display font-bold text-brand-blue text-sm">Full Safety Gear, Every Job</p>
@@ -97,7 +97,7 @@ const notFitItems = [
             width="600"
             height="400"
             loading="lazy"
-            class="w-full h-64 object-cover"
+            class="w-full h-64 object-cover object-top"
           />
           <div class="p-4 bg-neutral-50">
             <p class="font-display font-bold text-brand-blue text-sm">Professional Equipment for Every Project</p>
@@ -110,7 +110,7 @@ const notFitItems = [
             width="600"
             height="400"
             loading="lazy"
-            class="w-full h-64 object-cover"
+            class="w-full h-64 object-cover object-top"
           />
           <div class="p-4 bg-neutral-50">
             <p class="font-display font-bold text-brand-blue text-sm">Precision Trimming for Clean Results</p>

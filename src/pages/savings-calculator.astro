@@ -5,16 +5,16 @@ import CTASection from '../components/CTASection.astro';
 import SavingsCalculator from '../components/SavingsCalculator.tsx';
 import { cities } from '../data/cities';
 
-const title = 'Energy Savings Calculator | Rocking Rad Spray Foam';
-const description = 'See how much you could save on energy bills with spray foam insulation. Free calculator — enter your home details and get instant savings estimates for your Oklahoma property.';
+const title = 'Energy Savings & ROI Calculator | Rocking Rad Spray Foam';
+const description = 'See how much you could save with spray foam insulation. Free calculator for homes and businesses — enter your details and get instant savings estimates for your Oklahoma property.';
 
 const calculatorCities = cities.map(c => ({ slug: c.slug, name: c.name, zipCodes: c.zipCodes }));
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} breadcrumbs={[{ name: 'Home', url: '/' }, { name: 'Savings Calculator', url: '/savings-calculator' }]}>
   <HeroSection
     title="See How Much You Could Save"
-    subtitle="Answer a few quick questions about your home and get an instant estimate of your energy savings, payback period, and 20-year ROI with spray foam insulation."
+    subtitle="Answer a few quick questions about your home or business and get an instant estimate of your energy savings, payback period, and 20-year ROI with spray foam insulation."
     ctaText="Get Your Free Estimate"
     ctaHref="/contact"
     compact
@@ -34,11 +34,11 @@ const calculatorCities = cities.map(c => ({ slug: c.slug, name: c.name, zipCodes
         </p>
         <ul class="text-sm text-neutral-600 space-y-1 list-disc list-inside">
           <li>Oklahoma average electricity rate: $0.13/kWh (EIA 2025)</li>
-          <li>Heating and cooling represent ~55% of home energy use (DOE)</li>
+          <li>Heating and cooling represent ~55% of residential / ~60% of commercial energy use (DOE)</li>
           <li>Energy costs escalate at ~4% per year (EIA Annual Energy Outlook)</li>
         </ul>
         <p class="text-xs text-neutral-400 mt-3">
-          Actual savings depend on your specific home, usage patterns, and installation quality. Schedule a free assessment for an accurate, personalized estimate.
+          Actual savings depend on your specific property, usage patterns, and installation quality. Schedule a free assessment for an accurate, personalized estimate.
         </p>
       </div>
     </div>
