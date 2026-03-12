@@ -4,7 +4,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import CTASection from '../../components/CTASection.astro';
 
-const categories = ['All', 'Cost', 'Education', 'Process', 'Financing', 'Comparison'];
+const categories = ['All', 'Money Pages', 'Problem Solvers', 'Oklahoma Local'];
+
+// Map display names to content collection enum values
+const categoryMap: Record<string, string> = {
+  'Money Pages': 'money-page',
+  'Problem Solvers': 'symptom-based',
+  'Oklahoma Local': 'local-oklahoma',
+};
 
 // Get real posts from content collection (non-draft only)
 let posts: any[] = [];
@@ -30,34 +37,41 @@ const placeholderArticles = [
   {
     title: 'How Much Does Spray Foam Insulation Cost in Oklahoma? (2026)',
     description: 'Real pricing for Oklahoma spray foam projects — attics, metal buildings, homes. Plus how to claim your 30% federal tax credit.',
-    category: 'Cost',
+    category: 'money-page',
     readTime: '8 min read',
   },
   {
     title: 'Open Cell vs. Closed Cell: Which Is Right for Your Project?',
     description: 'A straightforward comparison of the two spray foam types — where each one works best, what they cost, and how to choose.',
-    category: 'Comparison',
+    category: 'money-page',
     readTime: '6 min read',
+  },
+  {
+    title: 'Why Is My Metal Building Sweating? How to Stop Condensation',
+    description: 'Metal building condensation ruins inventory, causes rust, and makes your shop miserable. Here is why it happens and the permanent fix.',
+    category: 'symptom-based',
+    readTime: '7 min read',
   },
   {
     title: '5 Signs Your Oklahoma Home Needs Better Insulation',
     description: 'High energy bills are just the start. Here are 5 warning signs that your insulation is failing — and what to do about it.',
-    category: 'Education',
+    category: 'symptom-based',
     readTime: '5 min read',
   },
   {
-    title: 'The Complete Guide to Metal Building Insulation',
-    description: 'Why metal buildings sweat, why fiberglass fails, and why spray foam is the only real solution for Oklahoma shops and barns.',
-    category: 'Education',
-    readTime: '10 min read',
-  },
-  {
-    title: 'Spray Foam Tax Credits: How to Claim Your 30% Back',
-    description: 'The IRA gives you 30% back (up to $1,200) on spray foam insulation. Here\'s exactly how to claim it on your tax return.',
-    category: 'Financing',
-    readTime: '4 min read',
+    title: 'Best Insulation for Oklahoma\'s Ice Storms & Extreme Weather',
+    description: 'Oklahoma weather is brutal — triple-digit summers, ice storms, and everything in between. Here is which insulation actually holds up.',
+    category: 'local-oklahoma',
+    readTime: '6 min read',
   },
 ];
+
+// Display label mapping for category enum values
+const categoryLabel: Record<string, string> = {
+  'money-page': 'Money Pages',
+  'symptom-based': 'Problem Solvers',
+  'local-oklahoma': 'Oklahoma Local',
+};
 
 const displayPosts = posts.length > 0 ? posts : null;
 ---
@@ -75,11 +89,16 @@ const displayPosts = posts.length > 0 ? posts : null;
   <section class="section-padding">
     <div class="max-w-7xl mx-auto">
       <!-- Category Filters -->
-      <div class="flex flex-wrap gap-2 mb-8">
+      <div class="flex flex-wrap gap-2 mb-8" id="category-filters">
         {categories.map(cat => (
           <button
-            class="px-4 py-2 rounded-full text-sm font-medium border border-neutral-200 text-neutral-600 hover:border-brand-blue hover:text-brand-blue transition-colors"
-            data-category={cat}
+            class:list={[
+              'px-4 py-2 rounded-full text-sm font-medium border transition-colors',
+              cat === 'All'
+                ? 'border-brand-blue bg-brand-blue text-white'
+                : 'border-neutral-200 text-neutral-600 hover:border-brand-blue hover:text-brand-blue',
+            ]}
+            data-filter={cat === 'All' ? 'all' : categoryMap[cat]}
           >
             {cat}
           </button>
@@ -87,9 +106,9 @@ const displayPosts = posts.length > 0 ? posts : null;
       </div>
 
       {displayPosts ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="posts-grid">
           {displayPosts.map(post => (
-            <a href={`/blog/${post.slug}`} class="group block bg-white border border-neutral-200 rounded-xl overflow-hidden hover:shadow-lg transition-all">
+            <a href={`/blog/${post.slug}`} class="group block bg-white border border-neutral-200 rounded-xl overflow-hidden hover:shadow-lg transition-all" data-category={post.category}>
               {post.image && (
                 <div class="aspect-[16/9] bg-neutral-100">
                   <img src={post.image} alt={post.title} class="w-full h-full object-cover" loading="lazy" />
@@ -97,7 +116,7 @@ const displayPosts = posts.length > 0 ? posts : null;
               )}
               <div class="p-6">
                 <div class="flex items-center gap-2 mb-3">
-                  <span class="text-xs font-semibold text-accent-orange bg-accent-orange/10 px-2 py-1 rounded-full">{post.category}</span>
+                  <span class="text-xs font-semibold text-accent-orange bg-accent-orange/10 px-2 py-1 rounded-full">{categoryLabel[post.category] || post.category}</span>
                   <span class="text-xs text-neutral-500">{post.readTime}</span>
                 </div>
                 <h2 class="font-display font-bold text-lg text-brand-blue group-hover:text-brand-blue-light transition-colors mb-2">
@@ -111,11 +130,11 @@ const displayPosts = posts.length > 0 ? posts : null;
       ) : (
         <>
           <p class="text-center text-neutral-500 mb-8">Expert guides and tips coming soon. Here's what we're working on:</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="posts-grid">
             {placeholderArticles.map(article => (
-              <div class="bg-white border border-neutral-200 rounded-xl p-6">
+              <div class="bg-white border border-neutral-200 rounded-xl p-6" data-category={article.category}>
                 <div class="flex items-center gap-2 mb-3">
-                  <span class="text-xs font-semibold text-accent-orange bg-accent-orange/10 px-2 py-1 rounded-full">{article.category}</span>
+                  <span class="text-xs font-semibold text-accent-orange bg-accent-orange/10 px-2 py-1 rounded-full">{categoryLabel[article.category]}</span>
                   <span class="text-xs text-neutral-500">{article.readTime}</span>
                 </div>
                 <h2 class="font-display font-bold text-lg text-brand-blue mb-2">{article.title}</h2>
@@ -131,3 +150,36 @@ const displayPosts = posts.length > 0 ? posts : null;
 
   <CTASection />
 </BaseLayout>
+
+<script>
+  const filters = document.getElementById('category-filters');
+  const grid = document.getElementById('posts-grid');
+
+  if (filters && grid) {
+    const buttons = filters.querySelectorAll('button');
+    const cards = grid.querySelectorAll<HTMLElement>('[data-category]');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update active button styles
+        buttons.forEach(b => {
+          b.classList.remove('border-brand-blue', 'bg-brand-blue', 'text-white');
+          b.classList.add('border-neutral-200', 'text-neutral-600');
+        });
+        btn.classList.remove('border-neutral-200', 'text-neutral-600');
+        btn.classList.add('border-brand-blue', 'bg-brand-blue', 'text-white');
+
+        // Filter cards
+        cards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+</script>

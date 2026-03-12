@@ -50,7 +50,7 @@ const displayTestimonials = testimonials.slice(0, 3);
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => (
-            <ServiceCard name={service.name} slug={service.slug} description={service.description} />
+            <ServiceCard name={service.name} slug={service.slug} description={service.description} icon={service.icon} />
           ))}
         </div>
         <div class="text-center mt-8">

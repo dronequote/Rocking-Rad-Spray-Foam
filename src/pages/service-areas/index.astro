@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import CTASection from '../../components/CTASection.astro';
+import ServiceAreaMap from '../../components/ServiceAreaMap.tsx';
 import { cities } from '../../data/cities';
 
 const title = 'Service Areas | Spray Foam Insulation Oklahoma';
@@ -49,25 +50,8 @@ const allZipCodes = cities.flatMap((city) => city.zipCodes);
     </div>
   </section>
 
-  <!-- Map Placeholder -->
-  <section class="section-padding bg-neutral-50">
-    <div class="container-narrow">
-      <div class="text-center mb-8">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">Coverage Area</h2>
-        <p class="text-lg text-neutral-600 max-w-2xl mx-auto">Based in Ada, we serve communities across Oklahoma. Don't see your area? Call us — we likely cover it.</p>
-      </div>
-      <div class="bg-neutral-100 rounded-xl aspect-video max-w-4xl mx-auto flex items-center justify-center border border-neutral-200">
-        <div class="text-center text-neutral-500 p-8">
-          <svg class="w-16 h-16 mx-auto mb-4 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <p class="font-display font-bold text-lg mb-1">Oklahoma Service Area Map</p>
-          <p class="text-sm">Serving the entire state from our base in Ada, OK</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Interactive Service Area Map -->
+  <ServiceAreaMap client:visible cities={cities.map(c => ({ slug: c.slug, name: c.name, state: c.state, zipCodes: c.zipCodes, population: c.population, isHomeBase: c.isHomeBase }))} />
 
   <!-- All ZIP Codes -->
   <section class="section-padding bg-white">

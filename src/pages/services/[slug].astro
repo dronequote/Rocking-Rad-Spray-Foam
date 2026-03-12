@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import CTASection from '../../components/CTASection.astro';
 import QuoteForm from '../../components/QuoteForm.tsx';
+import ServiceIcon from '../../components/ServiceIcon.tsx';
 import { services, type Service } from '../../data/services';
 
 export function getStaticPaths() {
@@ -139,9 +140,9 @@ const combinedSchema = [faqSchema, serviceSchema];
             <h2 class="font-display text-2xl font-bold text-brand-blue mb-6">Key Benefits</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {service.benefits.map((benefit) => (
-                <div class="flex items-start gap-2">
-                  <span class="text-accent-orange font-bold mt-0.5 shrink-0">✓</span>
-                  <span class="text-neutral-700 text-sm">{benefit}</span>
+                <div class="flex items-start gap-3 bg-neutral-50 rounded-lg p-3 border border-neutral-100">
+                  <ServiceIcon client:load name={benefit.icon} size={18} className="text-accent-orange shrink-0 mt-0.5" />
+                  <span class="text-neutral-700 text-sm">{benefit.text}</span>
                 </div>
               ))}
             </div>

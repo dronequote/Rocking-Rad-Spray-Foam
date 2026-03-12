@@ -1,14 +1,81 @@
 ---
-const navItems = [
-  { label: 'Services', href: '/services' },
-  { label: 'Service Areas', href: '/service-areas' },
-  { label: 'About', href: '/about' },
-  { label: 'Financing', href: '/financing' },
-  { label: 'Reviews', href: '/reviews' },
-  { label: 'Gallery', href: '/gallery' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Blog', href: '/blog' },
+import ZipChecker from './ZipChecker.tsx';
+import { cities } from '../data/cities';
+
+const zipCheckerCities = cities.map(c => ({ slug: c.slug, name: c.name, zipCodes: c.zipCodes }));
+
+const navGroups = [
+  {
+    label: 'Services',
+    href: '/services',
+    children: [
+      { label: 'All Services', href: '/services' },
+      { label: 'Open Cell Spray Foam', href: '/services/open-cell-spray-foam' },
+      { label: 'Closed Cell Spray Foam', href: '/services/closed-cell-spray-foam' },
+      { label: 'Attic Insulation', href: '/services/attic-insulation' },
+      { label: 'Metal Building & Pole Barn', href: '/services/metal-building-insulation' },
+      { label: 'Commercial & Industrial', href: '/services/commercial-insulation' },
+    ],
+  },
+  {
+    label: 'Areas We Serve',
+    href: '/service-areas',
+    children: [
+      { label: 'All Service Areas', href: '/service-areas', region: null },
+      { label: 'Ada (HQ)', href: '/service-areas/ada', region: 'Central' },
+      { label: 'Oklahoma City', href: '/service-areas/oklahoma-city', region: 'Central' },
+      { label: 'Norman', href: '/service-areas/norman', region: 'Central' },
+      { label: 'Shawnee', href: '/service-areas/shawnee', region: 'Central' },
+      { label: 'Tulsa', href: '/service-areas/tulsa', region: 'Eastern' },
+      { label: 'McAlester', href: '/service-areas/mcalester', region: 'Eastern' },
+      { label: 'Stillwater', href: '/service-areas/stillwater', region: 'Eastern' },
+      { label: 'Durant', href: '/service-areas/durant', region: 'Southern' },
+      { label: 'Ardmore', href: '/service-areas/ardmore', region: 'Southern' },
+    ],
+  },
+  {
+    label: 'Learn',
+    href: null,
+    children: [
+      { label: 'Why Spray Foam', href: '/why-spray-foam' },
+      { label: 'FAQ', href: '/faq' },
+      { label: 'Financing & Tax Credits', href: '/financing' },
+      { label: 'Blog', href: '/blog' },
+    ],
+  },
+  {
+    label: 'About',
+    href: '/about',
+    children: [
+      { label: 'Our Story', href: '/about' },
+      { label: 'Reviews', href: '/reviews' },
+      { label: 'Project Gallery', href: '/gallery' },
+    ],
+  },
+  {
+    label: 'Contact',
+    href: '/contact',
+    children: null,
+  },
 ];
+
+// Helper to group area children by region
+function groupByRegion(children: any[]) {
+  const noRegion: any[] = [];
+  const regions: Record<string, any[]> = {};
+  for (const child of children) {
+    if (!child.region) {
+      noRegion.push(child);
+    } else {
+      if (!regions[child.region]) regions[child.region] = [];
+      regions[child.region].push(child);
+    }
+  }
+  return { noRegion, regions };
+}
+
+const areasGroup = navGroups.find(g => g.label === 'Areas We Serve');
+const areasGrouped = areasGroup?.children ? groupByRegion(areasGroup.children) : null;
 ---
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
@@ -28,16 +95,78 @@ const navItems = [
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden lg:flex items-center gap-6">
-        {navItems.map(item => (
-          <a href={item.href} class="text-sm font-medium text-neutral-700 hover:text-brand-blue transition-colors">
-            {item.label}
-          </a>
+      <nav class="hidden lg:flex items-center gap-1">
+        {navGroups.map((group) => (
+          group.children ? (
+            <div class="relative group/nav" data-dropdown>
+              <button
+                type="button"
+                class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-neutral-700 hover:text-brand-blue transition-colors rounded-lg hover:bg-neutral-50"
+              >
+                {group.label}
+                <svg class="w-3.5 h-3.5 text-neutral-400 group-hover/nav:text-brand-blue transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {/* Dropdown panel */}
+              <div class="dropdown-panel absolute top-full left-0 pt-2 opacity-0 invisible translate-y-1 transition-all duration-200 ease-out z-50">
+                {group.label === 'Areas We Serve' && areasGrouped ? (
+                  <div class="bg-white shadow-lg rounded-xl border border-neutral-100 p-4 min-w-[340px]">
+                    {/* All Service Areas link */}
+                    {areasGrouped.noRegion.map((item: any) => (
+                      <a
+                        href={item.href}
+                        class="block px-3 py-2 text-sm font-semibold text-brand-blue hover:bg-brand-blue/5 rounded-lg transition-colors mb-1"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                    <hr class="my-2 border-neutral-100" />
+                    <div class="grid grid-cols-2 gap-x-4 gap-y-0">
+                      {Object.entries(areasGrouped.regions).map(([region, items]) => (
+                        <div class="mb-2">
+                          <p class="px-3 pt-1 pb-1 text-xs font-semibold text-neutral-400 uppercase tracking-wider">{region}</p>
+                          {(items as any[]).map((item: any) => (
+                            <a
+                              href={item.href}
+                              class="block px-3 py-1.5 text-sm text-neutral-700 hover:text-brand-blue hover:bg-brand-blue/5 rounded-lg transition-colors"
+                            >
+                              {item.label}
+                            </a>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div class="bg-white shadow-lg rounded-xl border border-neutral-100 py-2 min-w-[220px]">
+                    {group.children!.map((child: any) => (
+                      <a
+                        href={child.href}
+                        class="block px-4 py-2 text-sm text-neutral-700 hover:text-brand-blue hover:bg-brand-blue/5 transition-colors"
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={group.href}
+              class="px-3 py-2 text-sm font-medium text-neutral-700 hover:text-brand-blue transition-colors rounded-lg hover:bg-neutral-50"
+            >
+              {group.label}
+            </a>
+          )
         ))}
       </nav>
 
       <!-- CTA + Phone -->
       <div class="hidden lg:flex items-center gap-4">
+        <ZipChecker client:visible cities={zipCheckerCities} />
         <a href="tel:5803205620" class="text-sm font-bold text-brand-blue hover:text-brand-blue-light">
           (580) 320-5620
         </a>
@@ -62,15 +191,71 @@ const navItems = [
 
     <!-- Mobile Nav -->
     <div id="mobile-menu" class="lg:hidden hidden pb-4">
-      <nav class="flex flex-col gap-2">
-        {navItems.map(item => (
-          <a href={item.href} class="px-3 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 rounded-lg">
-            {item.label}
-          </a>
+      <nav class="flex flex-col gap-1">
+        {navGroups.map((group) => (
+          group.children ? (
+            <div class="mobile-accordion" data-accordion>
+              <button
+                type="button"
+                class="flex items-center justify-between w-full px-3 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50 rounded-lg"
+                data-accordion-trigger
+              >
+                <span>{group.label}</span>
+                <svg class="w-4 h-4 text-neutral-400 transition-transform duration-200" data-accordion-chevron fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="accordion-content hidden pl-3" data-accordion-content>
+                {group.label === 'Areas We Serve' && areasGrouped ? (
+                  <div class="flex flex-col gap-0.5 py-1">
+                    {areasGrouped.noRegion.map((item: any) => (
+                      <a
+                        href={item.href}
+                        class="px-3 py-2 text-sm font-semibold text-brand-blue hover:bg-brand-blue/5 rounded-lg"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                    {Object.entries(areasGrouped.regions).map(([region, items]) => (
+                      <div>
+                        <p class="px-3 pt-2 pb-1 text-xs font-semibold text-neutral-400 uppercase tracking-wider">{region}</p>
+                        {(items as any[]).map((item: any) => (
+                          <a
+                            href={item.href}
+                            class="block px-3 py-1.5 text-sm text-neutral-600 hover:text-brand-blue hover:bg-brand-blue/5 rounded-lg"
+                          >
+                            {item.label}
+                          </a>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div class="flex flex-col gap-0.5 py-1">
+                    {group.children!.map((child: any) => (
+                      <a
+                        href={child.href}
+                        class="px-3 py-1.5 text-sm text-neutral-600 hover:text-brand-blue hover:bg-brand-blue/5 rounded-lg"
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={group.href}
+              class="px-3 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50 rounded-lg"
+            >
+              {group.label}
+            </a>
+          )
         ))}
         <hr class="my-2 border-neutral-200" />
         <a href="tel:5803205620" class="px-3 py-2 text-sm font-bold text-brand-blue">
-          📞 (580) 320-5620
+          (580) 320-5620
         </a>
         <a href="/contact" class="btn-primary text-sm text-center mx-3">
           Get Your Free Estimate
@@ -80,12 +265,57 @@ const navItems = [
   </div>
 </header>
 
+<style>
+  /* Desktop dropdown hover activation */
+  [data-dropdown]:hover .dropdown-panel,
+  [data-dropdown] .dropdown-panel:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+</style>
+
 <script>
+  // Mobile menu toggle
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   btn?.addEventListener('click', () => {
     const expanded = btn.getAttribute('aria-expanded') === 'true';
     btn.setAttribute('aria-expanded', String(!expanded));
     menu?.classList.toggle('hidden');
+  });
+
+  // Mobile accordion expand/collapse
+  document.querySelectorAll('[data-accordion-trigger]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const accordion = trigger.closest('[data-accordion]');
+      if (!accordion) return;
+
+      const content = accordion.querySelector('[data-accordion-content]') as HTMLElement;
+      const chevron = accordion.querySelector('[data-accordion-chevron]') as HTMLElement;
+      if (!content || !chevron) return;
+
+      const isOpen = !content.classList.contains('hidden');
+
+      if (isOpen) {
+        content.classList.add('hidden');
+        chevron.style.transform = 'rotate(0deg)';
+      } else {
+        content.classList.remove('hidden');
+        chevron.style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+
+  // Desktop: close dropdowns on click outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('[data-dropdown]')) {
+      document.querySelectorAll('[data-dropdown] .dropdown-panel').forEach((panel) => {
+        (panel as HTMLElement).style.opacity = '';
+        (panel as HTMLElement).style.visibility = '';
+        (panel as HTMLElement).style.transform = '';
+      });
+    }
   });
 </script>
