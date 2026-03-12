@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CTASection from '../components/CTASection.astro';
+import SavingsCalculator from '../components/SavingsCalculator.tsx';
+import { cities } from '../data/cities';
+
+const title = 'Energy Savings Calculator | Rocking Rad Spray Foam';
+const description = 'See how much you could save on energy bills with spray foam insulation. Free calculator — enter your home details and get instant savings estimates for your Oklahoma property.';
+
+const calculatorCities = cities.map(c => ({ slug: c.slug, name: c.name, zipCodes: c.zipCodes }));
+---
+
+<BaseLayout title={title} description={description}>
+  <HeroSection
+    title="See How Much You Could Save"
+    subtitle="Answer a few quick questions about your home and get an instant estimate of your energy savings, payback period, and 20-year ROI with spray foam insulation."
+    ctaText="Get Your Free Estimate"
+    ctaHref="/contact"
+    compact
+  />
+
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-neutral-200 p-6 sm:p-10">
+        <SavingsCalculator client:visible cities={calculatorCities} />
+      </div>
+
+      <!-- Methodology note -->
+      <div class="max-w-2xl mx-auto mt-10 bg-neutral-50 rounded-xl p-6 border border-neutral-200">
+        <h3 class="font-display text-lg font-bold text-brand-blue mb-2">How We Calculate Your Savings</h3>
+        <p class="text-sm text-neutral-600 leading-relaxed mb-3">
+          This calculator uses data from the U.S. Department of Energy, ENERGY STAR, and the Energy Information Administration to estimate your potential savings. Key assumptions:
+        </p>
+        <ul class="text-sm text-neutral-600 space-y-1 list-disc list-inside">
+          <li>Oklahoma average electricity rate: $0.13/kWh (EIA 2025)</li>
+          <li>Heating and cooling represent ~55% of home energy use (DOE)</li>
+          <li>Energy costs escalate at ~4% per year (EIA Annual Energy Outlook)</li>
+          <li>Federal tax credit: 30% up to $1,200 (IRC Section 25C)</li>
+          <li>OG&E rebate: $500 for qualifying attic insulation</li>
+        </ul>
+        <p class="text-xs text-neutral-400 mt-3">
+          Actual savings depend on your specific home, usage patterns, and installation quality. Schedule a free assessment for an accurate, personalized estimate.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

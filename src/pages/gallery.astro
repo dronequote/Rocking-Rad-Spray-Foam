@@ -141,16 +141,26 @@ const projects = [
   <section class="section-padding bg-white">
     <div class="container-narrow">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-neutral-200 hover:shadow-md transition-shadow">
-            <img
-              src={project.image}
-              alt={project.description}
-              width="600"
-              height="400"
-              loading="lazy"
-              class="w-full h-56 object-cover"
-            />
+            <button
+              type="button"
+              class="gallery-trigger w-full cursor-pointer"
+              data-index={i}
+              data-src={project.image}
+              data-alt={project.description}
+              data-title={project.title}
+              aria-label={`View full size: ${project.title}`}
+            >
+              <img
+                src={project.image}
+                alt={project.description}
+                width="600"
+                height="400"
+                loading="lazy"
+                class="w-full h-56 object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </button>
             <div class="p-5">
               <div class="flex items-center gap-2 mb-2">
                 <span class="text-xs font-semibold bg-brand-blue/10 text-brand-blue px-2 py-0.5 rounded-full">{project.type}</span>
@@ -171,4 +181,62 @@ const projects = [
   </section>
 
   <CTASection />
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 z-[100] hidden bg-black/90 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button id="lightbox-close" type="button" class="absolute top-4 right-4 text-white hover:text-neutral-300 z-10" aria-label="Close image viewer">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    </button>
+    <button id="lightbox-prev" type="button" class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-neutral-300 z-10 p-2" aria-label="Previous image">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+    </button>
+    <button id="lightbox-next" type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-neutral-300 z-10 p-2" aria-label="Next image">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+    </button>
+    <div class="max-w-5xl max-h-[90vh] flex flex-col items-center">
+      <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded-lg" />
+      <p id="lightbox-caption" class="text-white text-center mt-3 text-sm font-medium max-w-lg"></p>
+    </div>
+  </div>
 </BaseLayout>
+
+<script>
+  const lightbox = document.getElementById('lightbox')!;
+  const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lbCaption = document.getElementById('lightbox-caption')!;
+  const triggers = document.querySelectorAll('.gallery-trigger');
+  const items = Array.from(triggers).map(t => ({
+    src: t.getAttribute('data-src')!,
+    alt: t.getAttribute('data-alt')!,
+    title: t.getAttribute('data-title')!,
+  }));
+  let current = 0;
+
+  function show(index: number) {
+    current = ((index % items.length) + items.length) % items.length;
+    lbImg.src = items[current].src;
+    lbImg.alt = items[current].alt;
+    lbCaption.textContent = items[current].title;
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hide() {
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  triggers.forEach(t => t.addEventListener('click', () => show(Number(t.getAttribute('data-index')))));
+  document.getElementById('lightbox-close')!.addEventListener('click', hide);
+  document.getElementById('lightbox-prev')!.addEventListener('click', () => show(current - 1));
+  document.getElementById('lightbox-next')!.addEventListener('click', () => show(current + 1));
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) hide(); });
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('hidden')) return;
+    if (e.key === 'Escape') hide();
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+</script>
