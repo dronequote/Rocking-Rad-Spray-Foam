@@ -52,8 +52,6 @@ It also dampens sound significantly. If you've got a bonus room above the garage
 
 Open cell spray foam typically runs $0.44–$0.65 per board foot installed. For a standard 1,500 sq ft attic sprayed at 5.5 inches, you're looking at roughly $3,630–$5,363. That's a fraction of what you'd spend on closed cell for the same area, and the energy savings start from day one.
 
-The 30% federal tax credit (up to $1,200) through the Inflation Reduction Act applies to spray foam insulation installed in your primary residence. That can knock $1,000+ off your project cost.
-
 ## Open Cell vs. Closed Cell
 
 The decision comes down to where you're insulating and what you need. Open cell is the better value for interior applications where moisture isn't a concern. It costs less, fills gaps just as effectively, and provides solid R-value. Choose closed cell when you need the vapor barrier properties — crawl spaces, exterior walls, or metal buildings where condensation is an issue.
@@ -110,8 +108,6 @@ For new construction, closed cell in the exterior walls means you can hit code-r
 Closed cell spray foam runs $1.00–$1.60 per board foot installed. It's a higher upfront investment than open cell, but for applications where you need moisture resistance, structural improvement, or maximum R-value in minimal thickness, it's the only real option.
 
 A typical 2,000 sq ft metal building sprayed at 2 inches runs roughly $4,000–$6,400. The energy savings on a metal building can be dramatic — we've seen clients cut their heating and cooling costs by 40–60% after insulating a previously bare metal structure.
-
-The 30% federal tax credit (up to $1,200) applies here too. Combined with the energy savings, closed cell foam pays for itself faster than most homeowners expect.
 
 ## The Investment Perspective
 
@@ -172,7 +168,7 @@ After spraying, the foam cures within hours. You'll notice the difference the sa
 
 A typical Oklahoma home attic (1,200–2,000 sq ft) runs $3,600–$8,000 depending on size, accessibility, foam type, and thickness. That investment typically pays for itself in energy savings within 3–5 years, then continues saving you money for the life of the home.
 
-Don't forget the 30% federal tax credit — up to $1,200 back on your insulation project. That accelerates payback significantly.`,
+That investment typically pays for itself in energy savings within 3–5 years, then continues saving you money for the life of the home.`,
     faqs: [
       {
         question: 'How long does attic insulation take to install?',
@@ -225,7 +221,7 @@ Closed cell foam at 2 inches is the standard for metal buildings. It delivers R-
 
 **Pole barns and horse barns** — Livestock comfort directly affects health and productivity. Spray foam eliminates the condensation drip that causes respiratory issues in horses and cattle, and maintains stable temperatures that reduce stress and feed costs.
 
-**Commercial and industrial** — Warehouses, manufacturing facilities, retail spaces. Spray foam meets commercial energy code requirements and can qualify for utility rebates and the federal tax credit.
+**Commercial and industrial** — Warehouses, manufacturing facilities, retail spaces. Spray foam meets commercial energy code requirements.
 
 ## What It Costs
 
@@ -303,8 +299,8 @@ Commercial projects require a site visit for accurate estimating. Building size,
         answer: 'In most cases, yes. We can phase the work to minimize disruption — spraying sections at a time while the rest of the building operates normally. The foam cures quickly and is fully inert within 24 hours. We\'ll work around your schedule.',
       },
       {
-        question: 'Does commercial spray foam qualify for tax credits?',
-        answer: 'Commercial buildings may qualify for the Section 179D energy-efficient commercial building deduction, which can be substantial. The residential 30% tax credit (up to $1,200) applies to qualifying residential projects. Consult your tax advisor for specifics.',
+        question: 'Are there incentives for commercial spray foam insulation?',
+        answer: 'Commercial buildings may qualify for various energy-efficiency incentives and deductions. Contact your tax advisor for specifics on programs available for your project.',
       },
     ],
   },

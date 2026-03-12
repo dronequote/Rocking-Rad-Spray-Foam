@@ -36,7 +36,6 @@ export const company = {
   financing: {
     available: true,
     terms: '0% Financing Available',
-    taxCredit: '30% Federal Tax Credit (up to $1,200)',
   },
   seo: {
     defaultTitle: 'Rocking Rad Spray Foam | Spray Foam Insulation Oklahoma',

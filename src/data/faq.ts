@@ -32,12 +32,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: 'Is spray foam insulation worth the investment?',
-    answer: 'For most Oklahoma homes and buildings, absolutely. Spray foam typically reduces energy bills by 30–50%. On a $200/month utility bill, that\'s $720–$1,200 saved per year — every year. Most projects pay for themselves in 3–5 years through energy savings alone. Add the 30% federal tax credit (up to $1,200) and the permanent increase in property value, and spray foam consistently outperforms the alternatives on ROI.',
-    category: 'Cost',
-  },
-  {
-    question: 'Is there a tax credit for spray foam insulation?',
-    answer: 'Yes. The Inflation Reduction Act provides a 30% federal tax credit (up to $1,200 per year) for qualifying insulation installed in your primary residence. Spray foam insulation qualifies. This credit applies to both the material and labor costs. Consult your tax advisor for specific eligibility requirements.',
+    answer: 'For most Oklahoma homes and buildings, absolutely. Spray foam typically reduces energy bills by 30–50%. On a $200/month utility bill, that\'s $720–$1,200 saved per year — every year. Most projects pay for themselves in 3–5 years through energy savings alone. Add the permanent increase in property value, and spray foam consistently outperforms the alternatives on ROI.',
     category: 'Cost',
   },
   {

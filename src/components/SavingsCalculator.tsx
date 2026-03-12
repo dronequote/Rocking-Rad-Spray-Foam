@@ -13,9 +13,6 @@ interface SavingsCalculatorProps {
 // Constants
 const HEATING_COOLING_SHARE = 0.55;
 const ENERGY_ESCALATION = 0.04;
-const TAX_CREDIT_RATE = 0.30;
-const TAX_CREDIT_CAP = 1200;
-const OGE_REBATE = 500;
 
 const CONDITION_OPTIONS = [
   { key: 'poor', label: 'Little or No Insulation', desc: 'No insulation, bare walls/attic, very old home', savings: 0.42 },
@@ -168,6 +165,9 @@ export default function SavingsCalculator({ cities }: SavingsCalculatorProps) {
   // Step 5 — Areas
   const [areas, setAreas] = useState<AreaKey[]>(['attic']);
 
+  // Rebates & Incentives (editable in results)
+  const [userRebate, setUserRebate] = useState(0);
+
   // Read URL params on mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -219,9 +219,7 @@ export default function SavingsCalculator({ cities }: SavingsCalculatorProps) {
     return sum + opt.baseCost * (sqft / 1900);
   }, 0);
 
-  const taxCredit = Math.min(totalCost * TAX_CREDIT_RATE, TAX_CREDIT_CAP);
-  const ogeRebate = areas.includes('attic') ? OGE_REBATE : 0;
-  const netCost = totalCost - taxCredit - ogeRebate;
+  const netCost = totalCost - userRebate;
   const paybackYears = annualSavings > 0 ? netCost / annualSavings : 99;
 
   // 20-year cumulative with 4% escalation
@@ -453,12 +451,25 @@ export default function SavingsCalculator({ cities }: SavingsCalculatorProps) {
           <p className="font-bold text-neutral-800 mb-4">Your Investment Summary</p>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between"><span className="text-neutral-600">Estimated project cost</span><span className="font-semibold">{formatCurrency(totalCost)}</span></div>
-            <div className="flex justify-between text-green-700"><span>Federal tax credit (25C, 30%)</span><span>-{formatCurrency(taxCredit)}</span></div>
-            {ogeRebate > 0 && (
-              <div className="flex justify-between text-green-700"><span>OG&E rebate (attic insulation)</span><span>-{formatCurrency(ogeRebate)}</span></div>
-            )}
+            <div className="flex justify-between items-start text-green-700">
+              <div className="flex-1 mr-4">
+                <p>Rebates &amp; Incentives</p>
+                <p className="text-xs text-neutral-400 mt-0.5">Enter any rebates or incentives that apply to your project</p>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-green-700">-$</span>
+                <input
+                  type="number"
+                  min={0}
+                  value={userRebate || ''}
+                  placeholder="0"
+                  onChange={e => setUserRebate(Math.max(0, Number(e.target.value) || 0))}
+                  className="w-24 px-2 py-1 border border-neutral-300 rounded text-right text-green-700 font-semibold focus:border-[#8B1A1A] focus:outline-none"
+                />
+              </div>
+            </div>
             <hr className="border-neutral-200" />
-            <div className="flex justify-between font-bold text-lg"><span>Net investment</span><span className="text-[#8B1A1A]">{formatCurrency(netCost)}</span></div>
+            <div className="flex justify-between font-bold text-lg"><span>Your Net Investment</span><span className="text-[#8B1A1A]">{formatCurrency(netCost)}</span></div>
           </div>
         </div>
 
@@ -481,7 +492,7 @@ export default function SavingsCalculator({ cities }: SavingsCalculatorProps) {
 
         {/* Trust anchors */}
         <p className="text-xs text-neutral-400 text-center leading-relaxed">
-          Based on DOE and ENERGY STAR methodology. Energy rates from EIA 2025 Oklahoma residential data. Tax credit per IRC Section 25C (Inflation Reduction Act). OG&E rebate per OG&E Home Energy Efficiency Program. Actual savings vary by home condition, usage, and installation.
+          Based on DOE and ENERGY STAR methodology. Energy rates from EIA 2025 Oklahoma residential data. Actual savings vary by home condition, usage, and installation.
         </p>
 
         {/* CTA */}

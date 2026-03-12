@@ -28,9 +28,6 @@ const RATES = {
 
 const SQFT_PRESETS = [1000, 1500, 2000, 2500, 3000, 5000];
 
-const TAX_CREDIT_RATE = 0.3;
-const TAX_CREDIT_CAP = 1200;
-
 function formatCurrency(n: number): string {
   return "$" + Math.round(n).toLocaleString("en-US");
 }
@@ -45,10 +42,6 @@ function calculateRange(
     low: sqft * thickness * rate.low,
     high: sqft * thickness * rate.high,
   };
-}
-
-function taxCredit(cost: number): number {
-  return Math.min(cost * TAX_CREDIT_RATE, TAX_CREDIT_CAP);
 }
 
 export default function PriceEstimator() {
@@ -78,8 +71,6 @@ export default function PriceEstimator() {
     label: string;
     low: number;
     high: number;
-    creditLow: number;
-    creditHigh: number;
   }[] = [];
 
   if (step === 4 && numericSqft > 0) {
@@ -88,8 +79,6 @@ export default function PriceEstimator() {
       results.push({
         label: "Open Cell Spray Foam",
         ...r,
-        creditLow: taxCredit(r.low),
-        creditHigh: taxCredit(r.high),
       });
     }
     if (foamType === "closed" || foamType === "not-sure") {
@@ -97,8 +86,6 @@ export default function PriceEstimator() {
       results.push({
         label: "Closed Cell Spray Foam",
         ...r,
-        creditLow: taxCredit(r.low),
-        creditHigh: taxCredit(r.high),
       });
     }
   }
@@ -484,30 +471,9 @@ export default function PriceEstimator() {
                       fontSize: "1.75rem",
                       fontWeight: 700,
                       color: "#8B1A1A",
-                      marginBottom: "0.5rem",
                     }}
                   >
                     {formatCurrency(r.low)} &ndash; {formatCurrency(r.high)}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.875rem",
-                      color: "#059669",
-                      marginBottom: "0.25rem",
-                    }}
-                  >
-                    30% Federal Tax Credit: up to{" "}
-                    {formatCurrency(Math.max(r.creditLow, r.creditHigh))}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "1.125rem",
-                      fontWeight: 600,
-                      color: "#8B1A1A",
-                    }}
-                  >
-                    After Tax Credit: {formatCurrency(r.low - r.creditLow)}{" "}
-                    &ndash; {formatCurrency(r.high - r.creditHigh)}
                   </div>
                 </div>
               ))}
