@@ -17,14 +17,14 @@ interface Props {
 const { title, description, canonicalURL, ogImage, schema, breadcrumbs } = Astro.props;
 const siteURL = 'https://rockingradsprayfoam.com';
 const canonical = canonicalURL || new URL(Astro.url.pathname, siteURL).href;
-const ogImg = ogImage || `${siteURL}/images/og-default.jpg`;
+const ogImg = ogImage || `${siteURL}/images/spray-foam-insulation-contractor-spraying-metal-building-wall-oklahoma.jpg`;
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'InsulationContractor',
   '@id': `${siteURL}/#organization`,
   name: 'Rocking Rad Spray Foam LLC',
-  image: `${siteURL}/images/logo.png`,
+  image: `${siteURL}/images/rocking-rad-spray-foam-logo-full-color.png`,
   url: siteURL,
   telephone: '(580) 320-5620',
   email: 'rockingradsprayfoam@gmail.com',

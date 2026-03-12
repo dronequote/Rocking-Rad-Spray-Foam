@@ -28,7 +28,7 @@ export const company = {
     '94% Facebook Recommendation Rate',
   ],
   stats: {
-    yearsInBusiness: 5, // TODO: Verify with client
+    yearsInBusiness: 7, // Established 2019 per logo
     projectsCompleted: 500, // TODO: Verify with client
     googleRating: 5.0,
     facebookRecommendation: 94,

@@ -116,7 +116,7 @@ export default function PriceEstimator() {
         {/* Header */}
         <div
           style={{
-            background: "#1e3a5f",
+            background: "#8B1A1A",
             padding: "1.5rem 2rem",
           }}
         >
@@ -173,9 +173,9 @@ export default function PriceEstimator() {
                   fontSize: "0.875rem",
                   background:
                     s === step
-                      ? "#f27d20"
+                      ? "#C41E1E"
                       : s < step
-                        ? "#1e3a5f"
+                        ? "#8B1A1A"
                         : "#e5e7eb",
                   color: s <= step ? "#ffffff" : "#6b7280",
                   transition: "background 0.3s, color 0.3s",
@@ -188,7 +188,7 @@ export default function PriceEstimator() {
                   style={{
                     width: "2rem",
                     height: "2px",
-                    background: s < step ? "#1e3a5f" : "#e5e7eb",
+                    background: s < step ? "#8B1A1A" : "#e5e7eb",
                     transition: "background 0.3s",
                   }}
                 />
@@ -212,7 +212,7 @@ export default function PriceEstimator() {
               style={{
                 fontSize: "0.7rem",
                 fontWeight: i + 1 === step ? 600 : 400,
-                color: i + 1 === step ? "#f27d20" : "#6b7280",
+                color: i + 1 === step ? "#C41E1E" : "#6b7280",
                 textAlign: "center",
                 width: "3.5rem",
                 transition: "color 0.3s",
@@ -232,7 +232,7 @@ export default function PriceEstimator() {
                 style={{
                   fontSize: "1.125rem",
                   fontWeight: 600,
-                  color: "#1e3a5f",
+                  color: "#8B1A1A",
                   marginBottom: "1rem",
                 }}
               >
@@ -255,11 +255,11 @@ export default function PriceEstimator() {
                       borderRadius: "0.5rem",
                       border:
                         projectType === type
-                          ? "2px solid #f27d20"
+                          ? "2px solid #C41E1E"
                           : "2px solid #e5e7eb",
                       background:
                         projectType === type ? "rgba(242,125,32,0.08)" : "#fff",
-                      color: projectType === type ? "#f27d20" : "#374151",
+                      color: projectType === type ? "#C41E1E" : "#374151",
                       fontWeight: projectType === type ? 600 : 400,
                       fontSize: "0.95rem",
                       cursor: "pointer",
@@ -281,7 +281,7 @@ export default function PriceEstimator() {
                 style={{
                   fontSize: "1.125rem",
                   fontWeight: 600,
-                  color: "#1e3a5f",
+                  color: "#8B1A1A",
                   marginBottom: "1rem",
                 }}
               >
@@ -306,7 +306,7 @@ export default function PriceEstimator() {
                   boxSizing: "border-box",
                 }}
                 onFocus={(e) =>
-                  (e.currentTarget.style.borderColor = "#f27d20")
+                  (e.currentTarget.style.borderColor = "#C41E1E")
                 }
                 onBlur={(e) =>
                   (e.currentTarget.style.borderColor = "#e5e7eb")
@@ -330,11 +330,11 @@ export default function PriceEstimator() {
                       borderRadius: "2rem",
                       border:
                         sqft === preset
-                          ? "2px solid #f27d20"
+                          ? "2px solid #C41E1E"
                           : "2px solid #e5e7eb",
                       background:
                         sqft === preset ? "rgba(242,125,32,0.08)" : "#fff",
-                      color: sqft === preset ? "#f27d20" : "#374151",
+                      color: sqft === preset ? "#C41E1E" : "#374151",
                       fontWeight: sqft === preset ? 600 : 400,
                       fontSize: "0.875rem",
                       cursor: "pointer",
@@ -355,7 +355,7 @@ export default function PriceEstimator() {
                 style={{
                   fontSize: "1.125rem",
                   fontWeight: 600,
-                  color: "#1e3a5f",
+                  color: "#8B1A1A",
                   marginBottom: "1rem",
                 }}
               >
@@ -396,7 +396,7 @@ export default function PriceEstimator() {
                       borderRadius: "0.5rem",
                       border:
                         foamType === option.value
-                          ? "2px solid #f27d20"
+                          ? "2px solid #C41E1E"
                           : "2px solid #e5e7eb",
                       background:
                         foamType === option.value
@@ -412,7 +412,7 @@ export default function PriceEstimator() {
                         fontWeight: 600,
                         fontSize: "1rem",
                         color:
-                          foamType === option.value ? "#f27d20" : "#1e3a5f",
+                          foamType === option.value ? "#C41E1E" : "#8B1A1A",
                         marginBottom: "0.25rem",
                       }}
                     >
@@ -440,7 +440,7 @@ export default function PriceEstimator() {
                 style={{
                   fontSize: "1.125rem",
                   fontWeight: 600,
-                  color: "#1e3a5f",
+                  color: "#8B1A1A",
                   marginBottom: "0.25rem",
                 }}
               >
@@ -483,7 +483,7 @@ export default function PriceEstimator() {
                     style={{
                       fontSize: "1.75rem",
                       fontWeight: 700,
-                      color: "#1e3a5f",
+                      color: "#8B1A1A",
                       marginBottom: "0.5rem",
                     }}
                   >
@@ -503,7 +503,7 @@ export default function PriceEstimator() {
                     style={{
                       fontSize: "1.125rem",
                       fontWeight: 600,
-                      color: "#1e3a5f",
+                      color: "#8B1A1A",
                     }}
                   >
                     After Tax Credit: {formatCurrency(r.low - r.creditLow)}{" "}
@@ -543,7 +543,7 @@ export default function PriceEstimator() {
                   display: "block",
                   width: "100%",
                   padding: "1rem",
-                  background: "#f27d20",
+                  background: "#C41E1E",
                   color: "#ffffff",
                   fontWeight: 700,
                   fontSize: "1.125rem",
@@ -557,7 +557,7 @@ export default function PriceEstimator() {
                   (e.currentTarget.style.background = "#e06d10")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = "#f27d20")
+                  (e.currentTarget.style.background = "#C41E1E")
                 }
               >
                 Want an Exact Price? Get Your Free Estimate
@@ -577,7 +577,7 @@ export default function PriceEstimator() {
                   style={{
                     fontSize: "1rem",
                     fontWeight: 600,
-                    color: "#1e3a5f",
+                    color: "#8B1A1A",
                     textDecoration: "none",
                   }}
                 >
@@ -624,7 +624,7 @@ export default function PriceEstimator() {
                   padding: "0.75rem 2rem",
                   borderRadius: "0.5rem",
                   border: "none",
-                  background: canProceed ? "#f27d20" : "#d1d5db",
+                  background: canProceed ? "#C41E1E" : "#d1d5db",
                   color: canProceed ? "#ffffff" : "#9ca3af",
                   fontWeight: 600,
                   fontSize: "0.95rem",

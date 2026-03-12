@@ -1,13 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Colors */
-  --color-brand-blue: #1e3a5f;
-  --color-brand-blue-light: #2a4f7f;
-  --color-brand-blue-dark: #152a45;
-  --color-accent-orange: #f27d20;
-  --color-accent-orange-light: #f59b4d;
-  --color-accent-orange-dark: #d96a10;
+  /* Brand Colors — matched to Rocking Rad logo */
+  --color-brand-red: #8B1A1A;
+  --color-brand-red-light: #A52A2A;
+  --color-brand-red-dark: #6B1010;
+  --color-brand-charcoal: #1C1C1C;
+  --color-brand-charcoal-light: #2D2D2D;
+  --color-brand-silver: #C0C0C0;
+  --color-accent-red: #C41E1E;
+  --color-accent-red-light: #DC3545;
+  --color-accent-red-dark: #9A1515;
+
+  /* Legacy aliases — keeps existing class names working */
+  --color-brand-blue: #8B1A1A;
+  --color-brand-blue-light: #A52A2A;
+  --color-brand-blue-dark: #6B1010;
+  --color-accent-orange: #C41E1E;
+  --color-accent-orange-light: #DC3545;
+  --color-accent-orange-dark: #9A1515;
+
   --color-neutral-50: #fafafa;
   --color-neutral-100: #f5f5f5;
   --color-neutral-200: #e5e5e5;
