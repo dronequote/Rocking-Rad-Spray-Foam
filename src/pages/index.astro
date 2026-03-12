@@ -80,6 +80,63 @@ const displayTestimonials = testimonials.slice(0, 3);
       </div>
     </section>
 
+    <!-- Project Photos -->
+    <section class="section-padding bg-white">
+      <div class="container-narrow">
+        <div class="text-center mb-10">
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">Recent Projects Across Oklahoma</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl mx-auto">From metal buildings to new construction homes, see the quality of our spray foam insulation work.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="rounded-xl overflow-hidden shadow-md">
+            <img
+              src="/images/closed-cell-spray-foam-metal-building-ceiling-walls-completed.jpg"
+              alt="Completed closed cell spray foam insulation on metal building ceiling and walls in Oklahoma"
+              width="600"
+              height="400"
+              loading="lazy"
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-4 bg-neutral-50">
+              <p class="font-display font-bold text-brand-blue text-sm">Metal Building — Closed Cell Foam</p>
+              <p class="text-xs text-neutral-500 mt-1">Full coverage on ceiling and walls</p>
+            </div>
+          </div>
+          <div class="rounded-xl overflow-hidden shadow-md">
+            <img
+              src="/images/open-cell-spray-foam-residential-arched-ceiling-new-home-oklahoma.jpg"
+              alt="Open cell spray foam insulation on residential arched ceiling in new Oklahoma home"
+              width="600"
+              height="400"
+              loading="lazy"
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-4 bg-neutral-50">
+              <p class="font-display font-bold text-brand-blue text-sm">New Home — Open Cell Foam</p>
+              <p class="text-xs text-neutral-500 mt-1">Arched ceiling insulation for new construction</p>
+            </div>
+          </div>
+          <div class="rounded-xl overflow-hidden shadow-md">
+            <img
+              src="/images/spray-foam-insulation-metal-building-interior-completed-oklahoma.jpg"
+              alt="Completed spray foam insulation inside a metal building in Oklahoma"
+              width="600"
+              height="400"
+              loading="lazy"
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-4 bg-neutral-50">
+              <p class="font-display font-bold text-brand-blue text-sm">Metal Building — Completed Interior</p>
+              <p class="text-xs text-neutral-500 mt-1">Full insulation coverage, ready for finishing</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-8">
+          <a href="/gallery" class="btn-outline">View Full Project Gallery</a>
+        </div>
+      </div>
+    </section>
+
     <!-- Testimonials -->
     <section class="section-padding bg-white">
       <div class="container-narrow">
@@ -137,12 +194,32 @@ const displayTestimonials = testimonials.slice(0, 3);
     <!-- Quote Form -->
     <section id="quote" class="section-padding bg-brand-blue">
       <div class="container-narrow">
-        <div class="max-w-3xl mx-auto">
-          <div class="text-center mb-8">
-            <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">Get Your Free Estimate</h2>
-            <p class="text-lg text-blue-200">Tell us about your project and we'll get back to you within 24 hours with a custom quote.</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <div class="mb-8">
+              <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">Get Your Free Estimate</h2>
+              <p class="text-lg text-blue-200">Tell us about your project and we'll get back to you within 24 hours with a custom quote.</p>
+            </div>
+            <QuoteForm client:visible />
           </div>
-          <QuoteForm client:visible />
+          <div class="hidden lg:block space-y-4">
+            <img
+              src="/images/spray-foam-insulation-technician-full-safety-gear-oklahoma.jpg"
+              alt="Spray foam insulation technician in full safety gear ready for application in Oklahoma"
+              width="600"
+              height="400"
+              loading="lazy"
+              class="w-full rounded-xl shadow-lg"
+            />
+            <img
+              src="/images/spray-foam-gun-applying-closed-cell-insulation-closeup.jpg"
+              alt="Close-up of spray foam gun applying closed cell insulation in Oklahoma"
+              width="600"
+              height="300"
+              loading="lazy"
+              class="w-full rounded-xl shadow-lg"
+            />
+          </div>
         </div>
       </div>
     </section>

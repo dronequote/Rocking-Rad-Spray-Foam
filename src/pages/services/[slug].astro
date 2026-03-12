@@ -20,6 +20,31 @@ const { service } = Astro.props;
 
 const otherServices = services.filter((s) => s.slug !== service.slug);
 
+const serviceImageMap: Record<string, { src: string; alt: string }> = {
+  'open-cell-spray-foam': {
+    src: '/images/open-cell-spray-foam-new-construction-walls-ceiling-oklahoma.jpg',
+    alt: 'Open cell spray foam insulation applied to new construction walls and ceiling in Oklahoma',
+  },
+  'closed-cell-spray-foam': {
+    src: '/images/closed-cell-spray-foam-metal-building-ceiling-walls-completed.jpg',
+    alt: 'Closed cell spray foam insulation completed on metal building ceiling and walls in Oklahoma',
+  },
+  'attic-insulation': {
+    src: '/images/open-cell-spray-foam-residential-arched-ceiling-new-home-oklahoma.jpg',
+    alt: 'Spray foam attic insulation on a residential arched ceiling in a new Oklahoma home',
+  },
+  'metal-building-insulation': {
+    src: '/images/spray-foam-insulation-metal-building-interior-completed-oklahoma.jpg',
+    alt: 'Completed spray foam insulation inside a metal building in Oklahoma',
+  },
+  'commercial-insulation': {
+    src: '/images/large-commercial-metal-building-before-insulation-oklahoma.jpg',
+    alt: 'Large commercial metal building in Oklahoma ready for professional spray foam insulation',
+  },
+};
+
+const serviceImage = serviceImageMap[service.slug];
+
 // Parse markdown-style content into HTML
 function parseContent(content: string): string {
   return content
@@ -95,6 +120,20 @@ const combinedSchema = [faqSchema, serviceSchema];
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <!-- Main Content -->
         <div class="lg:col-span-2">
+          <!-- Service Image -->
+          {serviceImage && (
+            <div class="mb-10 rounded-xl overflow-hidden shadow-md">
+              <img
+                src={serviceImage.src}
+                alt={serviceImage.alt}
+                width="800"
+                height="500"
+                loading="lazy"
+                class="w-full h-64 md:h-80 object-cover"
+              />
+            </div>
+          )}
+
           <!-- Benefits -->
           <div class="mb-10">
             <h2 class="font-display text-2xl font-bold text-brand-blue mb-6">Key Benefits</h2>

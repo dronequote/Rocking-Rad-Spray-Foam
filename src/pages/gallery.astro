@@ -7,18 +7,125 @@ const title = 'Project Gallery | Rocking Rad Spray Foam';
 const description = 'See our spray foam insulation work across Oklahoma. Attic, metal building, pole barn, commercial, and residential projects. Before and after photos.';
 
 const projects = [
-  { title: 'Residential Attic — Ada, OK', type: 'Attic Insulation', foam: 'Open Cell', description: 'Full attic spray foam on a 2,200 sq ft home. Sprayed roof decking at 5.5 inches for R-20. Customer reported 40% reduction in summer energy bills.', image: '/images/gallery/attic-ada.jpg' },
-  { title: 'Metal Shop — Shawnee, OK', type: 'Metal Building', foam: 'Closed Cell', description: '40x60 metal shop insulated with 2" closed cell. Eliminated condensation and created a comfortable year-round workspace.', image: '/images/gallery/metal-shawnee.jpg' },
-  { title: 'Pole Barn — Norman, OK', type: 'Metal Building', foam: 'Closed Cell', description: '30x50 pole barn conversion to workshop. Closed cell on walls and ceiling. Owner now uses it as a woodworking shop year-round.', image: '/images/gallery/pole-barn-norman.jpg' },
-  { title: 'Commercial Office — OKC', type: 'Commercial', foam: 'Open & Closed Cell', description: '5,000 sq ft office renovation. Closed cell on exterior walls, open cell on interior partitions. HVAC costs down 35%.', image: '/images/gallery/commercial-okc.jpg' },
-  { title: 'Crawl Space — McAlester, OK', type: 'Attic Insulation', foam: 'Closed Cell', description: 'Crawl space encapsulation with 2" closed cell. Stopped moisture intrusion and musty odors. Floors above no longer cold in winter.', image: '/images/gallery/crawl-mcalester.jpg' },
-  { title: 'New Construction — Stillwater, OK', type: 'Commercial', foam: 'Closed Cell', description: 'New 3,500 sq ft custom home. Closed cell in exterior walls, open cell in attic. Built to exceed Oklahoma energy code by 30%.', image: '/images/gallery/new-construction-stillwater.jpg' },
-  { title: 'Horse Barn — Durant, OK', type: 'Metal Building', foam: 'Closed Cell', description: '6-stall horse barn insulated with closed cell. Eliminated condensation drip, reduced summer temperatures by 20+ degrees inside.', image: '/images/gallery/horse-barn-durant.jpg' },
-  { title: 'Attic Retrofit — Tulsa, OK', type: 'Attic Insulation', foam: 'Open Cell', description: '1960s ranch home with inadequate blown-in insulation. Sprayed 7 inches of open cell on roof decking. Immediate comfort improvement.', image: '/images/gallery/attic-tulsa.jpg' },
-  { title: 'Warehouse — Ardmore, OK', type: 'Commercial', foam: 'Closed Cell', description: '15,000 sq ft warehouse with temperature-sensitive inventory. Closed cell on metal walls and roof. Energy costs reduced by 45%.', image: '/images/gallery/warehouse-ardmore.jpg' },
-  { title: 'Metal Building Home — Ada, OK', type: 'Metal Building', foam: 'Closed Cell', description: 'Barndominium build-out. Full closed cell envelope transformed a bare metal shell into a comfortable family home.', image: '/images/gallery/barndo-ada.jpg' },
-  { title: 'Bonus Room — OKC', type: 'Attic Insulation', foam: 'Open Cell', description: 'Bonus room above garage was unbearable in summer. Open cell on roof and walls made it the most comfortable room in the house.', image: '/images/gallery/bonus-room-okc.jpg' },
-  { title: 'Restaurant — Norman, OK', type: 'Commercial', foam: 'Open & Closed Cell', description: 'Restaurant renovation with walk-in cooler insulation and dining area comfort upgrade. Kitchen heat no longer invades the dining room.', image: '/images/gallery/restaurant-norman.jpg' },
+  {
+    title: 'Metal Building — Bare Interior Before Insulation',
+    type: 'Metal Building',
+    foam: 'Before',
+    description: 'A bare metal building interior before spray foam insulation — exposed steel framing with no thermal protection.',
+    image: '/images/bare-metal-building-interior-before-spray-foam-insulation.jpg',
+  },
+  {
+    title: 'Metal Building — Closed Cell Completed',
+    type: 'Metal Building',
+    foam: 'Closed Cell',
+    description: 'Closed cell spray foam fully applied to ceiling and walls of a metal building, providing a complete thermal and moisture barrier.',
+    image: '/images/closed-cell-spray-foam-metal-building-ceiling-walls-completed.jpg',
+  },
+  {
+    title: 'Large Commercial Metal Building — Before Insulation',
+    type: 'Commercial',
+    foam: 'Before',
+    description: 'A large commercial metal building in Oklahoma before insulation — ready for professional spray foam application.',
+    image: '/images/large-commercial-metal-building-before-insulation-oklahoma.jpg',
+  },
+  {
+    title: 'New Construction — Open Cell Walls & Ceiling',
+    type: 'Residential',
+    foam: 'Open Cell',
+    description: 'Open cell spray foam applied to walls and ceiling during new home construction in Oklahoma for maximum energy efficiency.',
+    image: '/images/open-cell-spray-foam-new-construction-walls-ceiling-oklahoma.jpg',
+  },
+  {
+    title: 'Residential Arched Ceiling — Open Cell Foam',
+    type: 'Residential',
+    foam: 'Open Cell',
+    description: 'Open cell spray foam insulation on a residential arched ceiling in a new Oklahoma home build, ensuring full coverage on complex geometry.',
+    image: '/images/open-cell-spray-foam-residential-arched-ceiling-new-home-oklahoma.jpg',
+  },
+  {
+    title: 'Job Site — Spray Foam Trailer at Grain Bin',
+    type: 'On the Job',
+    foam: 'Closed Cell',
+    description: 'Rocking Rad Spray Foam trailer set up at a grain bin insulation job site in Oklahoma.',
+    image: '/images/rocking-rad-spray-foam-trailer-grain-bin-job-site-oklahoma.jpg',
+  },
+  {
+    title: 'Job Site — Truck & Trailer Ready to Go',
+    type: 'On the Job',
+    foam: 'Equipment',
+    description: 'Rocking Rad Spray Foam truck and trailer at an Oklahoma job site, fully equipped for professional insulation installation.',
+    image: '/images/rocking-rad-spray-foam-truck-trailer-job-site-oklahoma.jpg',
+  },
+  {
+    title: 'Crew Member with Equipment — Metal Building',
+    type: 'On the Job',
+    foam: 'In Progress',
+    description: 'A spray foam crew member with professional equipment inside a metal building, ready for insulation application.',
+    image: '/images/spray-foam-crew-member-equipment-low-angle-metal-building.jpg',
+  },
+  {
+    title: 'Close-Up — Spray Foam Gun Applying Closed Cell',
+    type: 'Application Detail',
+    foam: 'Closed Cell',
+    description: 'Close-up of a spray foam gun applying closed cell insulation — precision application for consistent coverage.',
+    image: '/images/spray-foam-gun-applying-closed-cell-insulation-closeup.jpg',
+  },
+  {
+    title: 'Installer Spraying from Lift — Metal Building',
+    type: 'Metal Building',
+    foam: 'In Progress',
+    description: 'Spray foam installer applying insulation from a lift in a large Oklahoma metal building for full ceiling coverage.',
+    image: '/images/spray-foam-installer-spraying-metal-building-from-lift-oklahoma.jpg',
+  },
+  {
+    title: 'Contractor Spraying Metal Building Wall',
+    type: 'Metal Building',
+    foam: 'In Progress',
+    description: 'Spray foam insulation contractor spraying a metal building wall in Oklahoma — our team in action.',
+    image: '/images/spray-foam-insulation-contractor-spraying-metal-building-wall-oklahoma.jpg',
+  },
+  {
+    title: 'Metal Building Interior — Insulation Completed',
+    type: 'Metal Building',
+    foam: 'Closed Cell',
+    description: 'Completed spray foam insulation inside a metal building in Oklahoma — full thermal envelope ready for finishing.',
+    image: '/images/spray-foam-insulation-metal-building-interior-completed-oklahoma.jpg',
+  },
+  {
+    title: 'Quonset Hut — Spray Foam Completed',
+    type: 'Metal Building',
+    foam: 'Closed Cell',
+    description: 'Spray foam insulation fully applied inside a quonset hut arch building — complete coverage on curved surfaces.',
+    image: '/images/spray-foam-insulation-quonset-hut-arch-building-completed.jpg',
+  },
+  {
+    title: 'Shipping Container — Spray Foam Interior',
+    type: 'Specialty',
+    foam: 'Closed Cell',
+    description: 'Spray foam insulation applied to the interior of a shipping container in Oklahoma for climate-controlled conversion.',
+    image: '/images/spray-foam-insulation-shipping-container-interior-oklahoma.jpg',
+  },
+  {
+    title: 'Technician in Full Safety Gear',
+    type: 'On the Job',
+    foam: 'Safety',
+    description: 'Spray foam insulation technician in full safety gear on an Oklahoma job site — safety is always our priority.',
+    image: '/images/spray-foam-insulation-technician-full-safety-gear-oklahoma.jpg',
+  },
+  {
+    title: 'Wall Application Detail — Spray Foam',
+    type: 'Application Detail',
+    foam: 'In Progress',
+    description: 'Detailed view of spray foam insulation being applied to a wall in Oklahoma — even coverage for maximum performance.',
+    image: '/images/spray-foam-insulation-wall-application-detail-oklahoma.jpg',
+  },
+  {
+    title: 'Technician Trimming Insulation on Scaffold',
+    type: 'Finishing',
+    foam: 'Finishing',
+    description: 'Spray foam technician trimming insulation on a scaffold for a clean, professional finish.',
+    image: '/images/spray-foam-technician-trimming-insulation-on-scaffold.jpg',
+  },
 ];
 ---
 
@@ -36,13 +143,14 @@ const projects = [
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-neutral-200 hover:shadow-md transition-shadow">
-            <div class="aspect-video bg-neutral-100 relative">
-              <div class="absolute inset-0 flex items-center justify-center text-neutral-400">
-                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-            </div>
+            <img
+              src={project.image}
+              alt={project.description}
+              width="600"
+              height="400"
+              loading="lazy"
+              class="w-full h-56 object-cover"
+            />
             <div class="p-5">
               <div class="flex items-center gap-2 mb-2">
                 <span class="text-xs font-semibold bg-brand-blue/10 text-brand-blue px-2 py-0.5 rounded-full">{project.type}</span>

@@ -10,7 +10,7 @@ const description = 'Meet the team behind Oklahoma\'s trusted spray foam insulat
 const differentiators = [
   { title: 'Woman-Owned Business', text: 'Mariah helps lead our operations, and we\'re proud to be a certified woman-owned business serving Oklahoma.' },
   { title: 'Minority-Owned Business', text: 'Diversity in the trades matters. We bring a different perspective and a commitment to excellence.' },
-  { title: 'BBB A+ Rated', text: 'Our Better Business Bureau A+ rating reflects our commitment to honest pricing, quality work, and customer satisfaction.' },
+  { title: 'BBB A+ Rated', text: 'Our Better Business Bureau A+ rating reflects our commitment to honest pricing, quality work, and customer satisfaction.', link: 'https://www.bbb.org/us/ok/ada/profile/insulation-contractors/rocking-rad-spray-foam-llc-0995-90120194' },
   { title: 'Licensed Home Builders', text: 'We\'re not just insulation contractors — we\'re licensed home builders who understand construction from the ground up.' },
   { title: '94% Facebook Recommendation', text: '94% of people who\'ve interacted with us on Facebook recommend us. That\'s real trust from real customers.' },
   { title: 'Oklahoma Born & Based', text: 'We live here, we work here, and we understand Oklahoma\'s climate, building styles, and what homeowners need.' },
@@ -36,14 +36,85 @@ const notFitItems = [
   <!-- Our Story -->
   <section class="section-padding bg-white">
     <div class="container-narrow">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-6">Our Story</h2>
-        <div class="prose prose-lg text-neutral-700 space-y-4">
-          <p>Rocking Rad Spray Foam started with a simple idea: Oklahoma homeowners and business owners deserve an insulation contractor who shows up on time, does the job right, and charges a fair price. That shouldn't be radical, but in this industry, it kind of is.</p>
-          <p><strong>Rayce</strong> is our lead operator — the one on-site making sure every square inch gets proper coverage. He's meticulous about preparation, application thickness, and cleanup. If it's not right, it gets fixed before we leave.</p>
-          <p><strong>Kyle</strong> handles sales and customer relationships. He's the one who walks your property, listens to your concerns, and recommends the right solution — not the most expensive one. He'll tell you if spray foam isn't the right fit for your project (yes, that happens sometimes).</p>
-          <p><strong>Mariah</strong> keeps the business running behind the scenes — scheduling, bookkeeping, customer follow-up, and making sure nothing falls through the cracks. She's the reason your estimate shows up on time and your questions get answered.</p>
-          <p>Together, we've built a company that we're proud of. Not the biggest spray foam company in Oklahoma — but we think we're the most honest, and our customers seem to agree.</p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-6">Our Story</h2>
+          <div class="prose prose-lg text-neutral-700 space-y-4">
+            <p>Rocking Rad Spray Foam started with a simple idea: Oklahoma homeowners and business owners deserve an insulation contractor who shows up on time, does the job right, and charges a fair price. That shouldn't be radical, but in this industry, it kind of is.</p>
+            <p><strong>Rayce</strong> is our lead operator — the one on-site making sure every square inch gets proper coverage. He's meticulous about preparation, application thickness, and cleanup. If it's not right, it gets fixed before we leave.</p>
+            <p><strong>Kyle</strong> handles sales and customer relationships. He's the one who walks your property, listens to your concerns, and recommends the right solution — not the most expensive one. He'll tell you if spray foam isn't the right fit for your project (yes, that happens sometimes).</p>
+            <p><strong>Mariah</strong> keeps the business running behind the scenes — scheduling, bookkeeping, customer follow-up, and making sure nothing falls through the cracks. She's the reason your estimate shows up on time and your questions get answered.</p>
+            <p>Together, we've built a company that we're proud of. Not the biggest spray foam company in Oklahoma — but we think we're the most honest, and our customers seem to agree.</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <img
+            src="/images/rocking-rad-spray-foam-truck-trailer-job-site-oklahoma.jpg"
+            alt="Rocking Rad Spray Foam truck and trailer at a job site in Oklahoma"
+            width="600"
+            height="400"
+            loading="lazy"
+            class="w-full rounded-xl shadow-md"
+          />
+          <img
+            src="/images/rocking-rad-spray-foam-trailer-grain-bin-job-site-oklahoma.jpg"
+            alt="Rocking Rad Spray Foam trailer set up at a grain bin insulation job site in Oklahoma"
+            width="600"
+            height="400"
+            loading="lazy"
+            class="w-full rounded-xl shadow-md"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Team at Work -->
+  <section class="section-padding bg-white border-t border-neutral-100">
+    <div class="container-narrow">
+      <div class="text-center mb-10">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">Our Team at Work</h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto">Every job gets our full attention — from preparation through final inspection.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="rounded-xl overflow-hidden shadow-md">
+          <img
+            src="/images/spray-foam-insulation-technician-full-safety-gear-oklahoma.jpg"
+            alt="Spray foam insulation technician in full safety gear on an Oklahoma job site"
+            width="600"
+            height="400"
+            loading="lazy"
+            class="w-full h-64 object-cover"
+          />
+          <div class="p-4 bg-neutral-50">
+            <p class="font-display font-bold text-brand-blue text-sm">Full Safety Gear, Every Job</p>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden shadow-md">
+          <img
+            src="/images/spray-foam-installer-spraying-metal-building-from-lift-oklahoma.jpg"
+            alt="Spray foam installer spraying insulation in a metal building from a lift in Oklahoma"
+            width="600"
+            height="400"
+            loading="lazy"
+            class="w-full h-64 object-cover"
+          />
+          <div class="p-4 bg-neutral-50">
+            <p class="font-display font-bold text-brand-blue text-sm">Professional Equipment for Every Project</p>
+          </div>
+        </div>
+        <div class="rounded-xl overflow-hidden shadow-md">
+          <img
+            src="/images/spray-foam-technician-trimming-insulation-on-scaffold.jpg"
+            alt="Spray foam technician trimming insulation on scaffold for a clean finish"
+            width="600"
+            height="400"
+            loading="lazy"
+            class="w-full h-64 object-cover"
+          />
+          <div class="p-4 bg-neutral-50">
+            <p class="font-display font-bold text-brand-blue text-sm">Precision Trimming for Clean Results</p>
+          </div>
         </div>
       </div>
     </div>
@@ -61,6 +132,11 @@ const notFitItems = [
           <div class="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
             <h3 class="font-display text-lg font-bold text-brand-blue mb-2">{item.title}</h3>
             <p class="text-neutral-600 text-sm">{item.text}</p>
+            {item.link && (
+              <a href={item.link} target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-sm text-accent-orange hover:text-accent-orange-dark font-medium">
+                View Our BBB Profile →
+              </a>
+            )}
           </div>
         ))}
       </div>
