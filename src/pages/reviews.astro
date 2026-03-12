@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CTASection from '../components/CTASection.astro';
+import { testimonials } from '../data/testimonials';
+import { company } from '../data/company';
+
+const title = 'Customer Reviews | Rocking Rad Spray Foam';
+const description = 'Read what Oklahoma customers say about Rocking Rad Spray Foam. 5-star Google rating, 94% Facebook recommendation rate. Real reviews from real customers.';
+
+const reviewSources = [
+  { name: 'Google', rating: '5.0', icon: 'G' },
+  { name: 'Facebook', rating: '94% Recommend', icon: 'f' },
+  { name: 'BBB', rating: 'A+ Rated', icon: 'BBB' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <HeroSection
+    title="What Our Customers Say"
+    subtitle="We let our work and our customers speak for us. Here's what they have to say."
+    ctaText="Get Your Free Estimate"
+    ctaHref="/contact"
+    backgroundImage="/images/hero-reviews.jpg"
+  />
+
+  <!-- Stats Bar -->
+  <section class="bg-brand-blue py-8">
+    <div class="container-narrow">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-white">
+        <div>
+          <p class="text-4xl font-display font-bold text-accent-orange">{company.stats.googleRating}</p>
+          <p class="text-sm mt-1">Google Star Rating</p>
+          <div class="flex justify-center mt-1 text-accent-orange">★★★★★</div>
+        </div>
+        <div>
+          <p class="text-4xl font-display font-bold text-accent-orange">{company.stats.facebookRecommendation}%</p>
+          <p class="text-sm mt-1">Facebook Recommendation Rate</p>
+        </div>
+        <div>
+          <p class="text-4xl font-display font-bold text-accent-orange">{company.stats.projectsCompleted}+</p>
+          <p class="text-sm mt-1">Projects Completed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Review Source Badges -->
+  <section class="section-padding bg-neutral-50">
+    <div class="container-narrow">
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
+        {reviewSources.map((source) => (
+          <div class="bg-white rounded-xl px-6 py-4 shadow-sm border border-neutral-200 flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center text-white font-bold text-sm">
+              {source.icon}
+            </div>
+            <div>
+              <p class="font-display font-bold text-brand-blue text-sm">{source.name}</p>
+              <p class="text-xs text-neutral-500">{source.rating}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- All Reviews -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {testimonials.map((review) => (
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+            <div class="flex text-accent-orange mb-3 text-sm">★★★★★</div>
+            <p class="text-neutral-700 text-sm mb-4 italic">"{review.text}"</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  {review.name.charAt(0)}
+                </div>
+                <div>
+                  <p class="font-semibold text-sm text-neutral-800">{review.name}</p>
+                  {review.location && <p class="text-xs text-neutral-500">{review.location}</p>}
+                </div>
+              </div>
+              <span class="text-xs font-medium bg-neutral-100 text-neutral-500 px-2 py-1 rounded">{review.source}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Leave a Review -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="font-display text-3xl font-bold text-brand-blue mb-4">Leave Us a Review</h2>
+        <p class="text-lg text-neutral-600 mb-8">Had a great experience? We'd love to hear about it. Your review helps other Oklahoma homeowners find quality insulation contractors.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={company.social.google} target="_blank" rel="noopener noreferrer" class="btn-primary">
+            Review on Google
+          </a>
+          <a href={company.social.facebook} target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            Review on Facebook
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

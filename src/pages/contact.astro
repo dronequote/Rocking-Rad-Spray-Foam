@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CTASection from '../components/CTASection.astro';
+import QuoteForm from '../components/QuoteForm.tsx';
+import { company } from '../data/company';
+
+const title = 'Contact Us & Free Estimate | Rocking Rad';
+const description = 'Get a free spray foam insulation estimate from Rocking Rad Spray Foam. Call (580) 320-5620 or fill out our form. Serving all of Oklahoma.';
+
+const steps = [
+  { number: '1', title: 'Schedule', text: 'Fill out our form or call us. We\'ll set up a time that works for you.' },
+  { number: '2', title: 'We Visit', text: 'We walk your property, assess your needs, and take measurements.' },
+  { number: '3', title: 'Get Quote', text: 'You receive a detailed, written estimate within 24–48 hours. No surprises.' },
+  { number: '4', title: 'We Install', text: 'We show up on time, do the job right, and clean up when we\'re done.' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <HeroSection
+    title="Get Your Free Estimate"
+    subtitle="Tell us about your project and we'll provide a no-obligation quote. Most estimates delivered within 24 hours."
+    ctaText="Call (580) 320-5620"
+    ctaHref="tel:5803205620"
+    backgroundImage="/images/hero-contact.jpg"
+  />
+
+  <!-- Contact Form + Info -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+        <!-- Quote Form -->
+        <div class="lg:col-span-3">
+          <h2 class="font-display text-2xl font-bold text-brand-blue mb-6">Request Your Free Estimate</h2>
+          <QuoteForm client:visible />
+        </div>
+
+        <!-- Contact Info -->
+        <div class="lg:col-span-2">
+          <h2 class="font-display text-2xl font-bold text-brand-blue mb-6">Contact Information</h2>
+          <div class="space-y-6">
+            <div class="bg-neutral-50 rounded-xl p-6 border border-neutral-200">
+              <h3 class="font-display font-bold text-brand-blue mb-1">Phone</h3>
+              <a href="tel:5803205620" class="text-lg font-semibold text-accent-orange hover:text-accent-orange-dark">
+                {company.phone}
+              </a>
+              <p class="text-sm text-neutral-500 mt-1">Call or text anytime</p>
+            </div>
+
+            <div class="bg-neutral-50 rounded-xl p-6 border border-neutral-200">
+              <h3 class="font-display font-bold text-brand-blue mb-1">Email</h3>
+              <a href={`mailto:${company.email}`} class="text-accent-orange hover:text-accent-orange-dark break-all">
+                {company.email}
+              </a>
+            </div>
+
+            <div class="bg-neutral-50 rounded-xl p-6 border border-neutral-200">
+              <h3 class="font-display font-bold text-brand-blue mb-1">Location</h3>
+              <p class="text-neutral-700">{company.address.city}, {company.address.state} {company.address.zip}</p>
+              <p class="text-sm text-neutral-500 mt-1">Serving all of Oklahoma</p>
+            </div>
+
+            <div class="bg-neutral-50 rounded-xl p-6 border border-neutral-200">
+              <h3 class="font-display font-bold text-brand-blue mb-1">Hours</h3>
+              <p class="text-neutral-700">{company.hours}</p>
+            </div>
+
+            <!-- Map Placeholder -->
+            <div class="bg-neutral-100 rounded-xl aspect-video flex items-center justify-center border border-neutral-200">
+              <div class="text-center text-neutral-500">
+                <p class="font-display font-bold mb-1">Service Area Map</p>
+                <p class="text-sm">Serving all of Oklahoma from Ada</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What to Expect -->
+  <section class="section-padding bg-neutral-50">
+    <div class="container-narrow">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">What to Expect</h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto">Our process is simple, transparent, and designed to respect your time.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {steps.map((step) => (
+          <div class="text-center">
+            <div class="w-14 h-14 mx-auto bg-accent-orange text-white rounded-full flex items-center justify-center font-display font-bold text-xl mb-4">
+              {step.number}
+            </div>
+            <h3 class="font-display font-bold text-brand-blue text-lg mb-2">{step.title}</h3>
+            <p class="text-neutral-600 text-sm">{step.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

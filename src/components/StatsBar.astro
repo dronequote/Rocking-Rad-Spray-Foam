@@ -1,0 +1,25 @@
+---
+const stats = [
+  { value: '500+', label: 'Projects Completed' },
+  { value: '5.0★', label: 'Google Rating' },
+  { value: 'A+', label: 'BBB Rating' },
+  { value: '94%', label: 'Facebook Recommendation' },
+];
+---
+
+<section class="bg-neutral-50 py-8 lg:py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      {stats.map(stat => (
+        <div class="text-center">
+          <div class="font-display font-extrabold text-3xl lg:text-4xl text-brand-blue">
+            {stat.value}
+          </div>
+          <div class="text-sm text-neutral-600 mt-1 font-medium">
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

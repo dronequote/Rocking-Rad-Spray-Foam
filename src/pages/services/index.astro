@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CTASection from '../../components/CTASection.astro';
+import { services } from '../../data/services';
+
+const title = 'Spray Foam Insulation Services | Oklahoma';
+const description = 'Professional spray foam insulation services in Oklahoma. Open cell, closed cell, attic, metal building & commercial insulation. Free estimates. (580) 320-5620';
+
+const processSteps = [
+  { number: '1', title: 'Assess', text: 'We walk your property, identify problem areas, and evaluate your insulation needs.' },
+  { number: '2', title: 'Recommend', text: 'We recommend the right foam type and thickness for your specific application and budget.' },
+  { number: '3', title: 'Install', text: 'Our certified crew installs your insulation to exact specifications with zero shortcuts.' },
+  { number: '4', title: 'Inspect', text: 'We verify coverage, thickness, and quality before cleanup. You see the results before we leave.' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <HeroSection
+    title="Professional Spray Foam Services"
+    subtitle="From residential attics to commercial metal buildings, we deliver the right insulation solution for every project in Oklahoma."
+    ctaText="Get Your Free Estimate"
+    ctaHref="/contact"
+    backgroundImage="/images/hero-services.jpg"
+  />
+
+  <!-- Services Grid -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">Our Insulation Services</h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto">Every project gets the same attention to detail — whether it's a 1,200 sq ft attic or a 50,000 sq ft warehouse.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service) => (
+          <ServiceCard name={service.name} slug={service.slug} description={service.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Work -->
+  <section class="section-padding bg-neutral-50">
+    <div class="container-narrow">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">How We Work</h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto">Our four-step process ensures every project is done right the first time.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {processSteps.map((step) => (
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto bg-brand-blue text-white rounded-full flex items-center justify-center font-display font-bold text-2xl mb-4">
+              {step.number}
+            </div>
+            <h3 class="font-display font-bold text-brand-blue text-xl mb-2">{step.title}</h3>
+            <p class="text-neutral-600 text-sm">{step.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Summaries -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="max-w-3xl mx-auto space-y-12">
+        {services.map((service) => (
+          <div class="border-b border-neutral-200 pb-10 last:border-0">
+            <h2 class="font-display text-2xl font-bold text-brand-blue mb-3">
+              <a href={`/services/${service.slug}`} class="hover:text-accent-orange transition-colors">{service.name}</a>
+            </h2>
+            <p class="text-neutral-600 mb-3">{service.description}</p>
+            <div class="flex flex-wrap gap-4 text-sm text-neutral-500 mb-4">
+              <span><strong>R-Value:</strong> {service.rValue}</span>
+              <span><strong>Cost:</strong> {service.costRange}</span>
+            </div>
+            <a href={`/services/${service.slug}`} class="text-accent-orange font-semibold hover:text-accent-orange-dark transition-colors">
+              Learn More →
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

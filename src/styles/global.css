@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand Colors */
+  --color-brand-blue: #1e3a5f;
+  --color-brand-blue-light: #2a4f7f;
+  --color-brand-blue-dark: #152a45;
+  --color-accent-orange: #f27d20;
+  --color-accent-orange-light: #f59b4d;
+  --color-accent-orange-dark: #d96a10;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+
+  /* Fonts */
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-body);
+  color: var(--color-neutral-800);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Component utilities */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-accent-orange);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  &:hover {
+    background-color: var(--color-accent-orange-dark);
+  }
+}
+
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-brand-blue);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  &:hover {
+    background-color: var(--color-brand-blue-light);
+  }
+}
+
+@utility btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-brand-blue);
+  color: var(--color-brand-blue);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  text-decoration: none;
+  &:hover {
+    background-color: var(--color-brand-blue);
+    color: white;
+  }
+}
+
+@utility section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @media (min-width: 768px) {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@utility container-narrow {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}

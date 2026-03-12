@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CTASection from '../components/CTASection.astro';
+
+const title = 'Financing & Tax Credits | Rocking Rad';
+const description = 'Make spray foam insulation affordable with 0% financing and a 30% federal tax credit (up to $1,200). Learn how to save on your insulation project.';
+
+const financingSteps = [
+  { number: '1', title: 'Get Your Estimate', text: 'We provide a detailed, no-obligation quote for your project.' },
+  { number: '2', title: 'Apply for Financing', text: 'Quick application with fast approval. We walk you through the options.' },
+  { number: '3', title: 'We Install', text: 'Your project gets scheduled and completed to the highest standards.' },
+  { number: '4', title: 'Claim Your Tax Credit', text: 'We provide all documentation needed to claim your 30% federal tax credit.' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <HeroSection
+    title="Make Spray Foam Affordable"
+    subtitle="Between 0% financing and a 30% federal tax credit, spray foam insulation is more accessible than you think."
+    ctaText="Get Your Free Estimate"
+    ctaHref="/contact"
+    backgroundImage="/images/hero-financing.jpg"
+  />
+
+  <!-- 0% Financing -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-6">0% Financing Available</h2>
+        <div class="bg-accent-orange/5 border border-accent-orange/20 rounded-xl p-6 md:p-8 mb-8">
+          <p class="text-lg text-neutral-700 mb-4">We understand that spray foam insulation is an investment. That's why we offer <strong>0% financing</strong> to make it easier to get started. No interest means you pay the same price whether you pay upfront or spread it over time.</p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2">
+              <span class="text-accent-orange font-bold mt-0.5">✓</span>
+              <span class="text-neutral-700">0% interest on qualifying projects</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent-orange font-bold mt-0.5">✓</span>
+              <span class="text-neutral-700">Quick and easy application process</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent-orange font-bold mt-0.5">✓</span>
+              <span class="text-neutral-700">Flexible payment terms</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent-orange font-bold mt-0.5">✓</span>
+              <span class="text-neutral-700">No prepayment penalties</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 30% Federal Tax Credit -->
+  <section class="section-padding bg-neutral-50">
+    <div class="container-narrow">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-6">30% Federal Tax Credit</h2>
+        <div class="bg-brand-blue/5 border border-brand-blue/20 rounded-xl p-6 md:p-8 mb-8">
+          <p class="text-2xl font-display font-bold text-accent-orange mb-4">Up to $1,200 Back on Your Insulation Project</p>
+          <p class="text-lg text-neutral-700 mb-6">The <strong>Inflation Reduction Act (IRA)</strong> provides a 30% tax credit for energy-efficient home improvements, including spray foam insulation. This is a direct tax credit — not a deduction — meaning it reduces your tax bill dollar for dollar.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white rounded-lg p-4 border border-neutral-200">
+              <h4 class="font-display font-bold text-brand-blue mb-1">Who Qualifies</h4>
+              <p class="text-sm text-neutral-600">Homeowners who install qualifying insulation in their primary residence. Available through 2032.</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-neutral-200">
+              <h4 class="font-display font-bold text-brand-blue mb-1">How Much</h4>
+              <p class="text-sm text-neutral-600">30% of the project cost, up to a maximum of $1,200 per year for insulation and air sealing.</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-neutral-200">
+              <h4 class="font-display font-bold text-brand-blue mb-1">What Qualifies</h4>
+              <p class="text-sm text-neutral-600">Spray foam insulation that meets or exceeds ENERGY STAR requirements for your climate zone.</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-neutral-200">
+              <h4 class="font-display font-bold text-brand-blue mb-1">How to Claim</h4>
+              <p class="text-sm text-neutral-600">File IRS Form 5695 with your tax return. We provide all necessary documentation and receipts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How Financing Works -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">How Financing Works</h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto">Four simple steps to affordable spray foam insulation.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {financingSteps.map((step) => (
+          <div class="text-center">
+            <div class="w-14 h-14 mx-auto bg-brand-blue text-white rounded-full flex items-center justify-center font-display font-bold text-xl mb-4">
+              {step.number}
+            </div>
+            <h3 class="font-display font-bold text-brand-blue text-lg mb-2">{step.title}</h3>
+            <p class="text-neutral-600 text-sm">{step.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cost Comparison -->
+  <section class="section-padding bg-neutral-50">
+    <div class="container-narrow">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-6 text-center">The Math Makes Sense</h2>
+        <p class="text-lg text-neutral-600 text-center mb-10">When you compare the monthly financing payment to the monthly energy savings, spray foam often pays for itself from day one.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-xl p-6 border border-neutral-200 text-center">
+            <h3 class="font-display text-lg font-bold text-neutral-500 mb-2">Typical Monthly Payment</h3>
+            <p class="text-4xl font-display font-bold text-brand-blue">$85–$150</p>
+            <p class="text-sm text-neutral-500 mt-2">Based on $5,000–$8,000 project with 0% financing over 60 months</p>
+          </div>
+          <div class="bg-white rounded-xl p-6 border border-accent-orange text-center">
+            <h3 class="font-display text-lg font-bold text-neutral-500 mb-2">Typical Monthly Energy Savings</h3>
+            <p class="text-4xl font-display font-bold text-accent-orange">$80–$200</p>
+            <p class="text-sm text-neutral-500 mt-2">Based on 30–50% reduction in heating and cooling costs</p>
+          </div>
+        </div>
+        <p class="text-center text-neutral-500 text-sm mt-6">*Plus up to $1,200 back from the federal tax credit in year one. Individual results vary based on home size, current insulation, and energy usage.</p>
+        <div class="text-center mt-8">
+          <a href="/contact" class="btn-primary">Get Your Custom Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

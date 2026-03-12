@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CTASection from '../components/CTASection.astro';
+
+const title = 'Why Spray Foam Insulation? | Rocking Rad';
+const description = 'Why spray foam beats fiberglass, cellulose, and mineral wool. R-value comparison, cost analysis, and Oklahoma climate benefits. Make an informed decision.';
+
+const comparisonData = [
+  { property: 'R-Value per Inch', sprayFoam: 'R-3.7 (OC) / R-6.5 (CC)', fiberglass: 'R-2.2 – R-3.8', cellulose: 'R-3.2 – R-3.8', mineralWool: 'R-3.0 – R-3.3' },
+  { property: 'Air Sealing', sprayFoam: 'Complete (built-in)', fiberglass: 'None', cellulose: 'Partial', mineralWool: 'None' },
+  { property: 'Moisture Barrier', sprayFoam: 'Yes (closed cell)', fiberglass: 'No', cellulose: 'No', mineralWool: 'No' },
+  { property: 'Lifespan', sprayFoam: 'Lifetime of structure', fiberglass: '10–25 years', cellulose: '20–30 years', mineralWool: '30+ years' },
+  { property: 'Settles Over Time', sprayFoam: 'No', fiberglass: 'Yes', cellulose: 'Yes (15–20%)', mineralWool: 'Minimal' },
+  { property: 'Pest Resistant', sprayFoam: 'Yes', fiberglass: 'No', cellulose: 'Treated', mineralWool: 'Yes' },
+  { property: 'Sound Dampening', sprayFoam: 'Excellent', fiberglass: 'Good', cellulose: 'Good', mineralWool: 'Excellent' },
+  { property: 'Structural Support', sprayFoam: 'Yes (closed cell)', fiberglass: 'No', cellulose: 'No', mineralWool: 'No' },
+];
+
+const myths = [
+  { myth: 'Spray foam is too expensive.', fact: 'When you factor in energy savings (30–50% reduction), the 30% tax credit, and the fact that spray foam never needs replacement, it\'s the most cost-effective insulation over the life of your home. Fiberglass needs replacing every 15–25 years.' },
+  { myth: 'Fiberglass does the same thing.', fact: 'Fiberglass insulates, but it doesn\'t air seal. Studies show that air leakage accounts for 25–40% of a home\'s energy loss. Spray foam is both insulation and air barrier in one application.' },
+  { myth: 'Spray foam traps moisture and causes mold.', fact: 'The opposite is true. Closed cell spray foam is a vapor barrier that prevents moisture from entering wall cavities. Open cell foam allows walls to dry in both directions. Properly installed spray foam reduces mold risk.' },
+  { myth: 'Spray foam off-gasses dangerous chemicals.', fact: 'Spray foam is fully cured within 24 hours of installation. Once cured, it\'s inert and produces no off-gassing. During installation, our crew wears full protective equipment and ventilates the space.' },
+  { myth: 'You can get the same results with DIY spray foam kits.', fact: 'DIY kits use a different formulation than professional-grade spray foam. Professional equipment heats the chemicals to precise temperatures and applies at exact ratios. Improper mixing or temperature causes poor expansion, off-gassing, and failed insulation.' },
+];
+
+const oklahomaReasons = [
+  { title: 'Extreme Heat', text: 'Oklahoma summers regularly exceed 100°F. An uninsulated attic can reach 150°F, turning your ceiling into a radiant heater. Spray foam keeps that heat where it belongs — outside.' },
+  { title: 'Ice Storms & Cold Snaps', text: 'Oklahoma winters bring ice storms and sudden temperature drops. Spray foam\'s airtight seal prevents cold air infiltration that fiberglass can\'t stop.' },
+  { title: 'Severe Weather', text: 'Closed cell spray foam adds structural rigidity to walls and roofs — up to 300% improvement in rack strength. That matters when Oklahoma\'s severe weather hits.' },
+  { title: 'High Humidity', text: 'Oklahoma\'s humidity creates condensation problems, especially in metal buildings. Closed cell foam is a built-in vapor barrier that eliminates condensation at the source.' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <HeroSection
+    title="Why Spray Foam Beats Every Other Insulation"
+    subtitle="Compare the facts. Spray foam delivers better performance, longer life, and lower total cost than fiberglass, cellulose, or mineral wool."
+    ctaText="Get Your Free Estimate"
+    ctaHref="/contact"
+    backgroundImage="/images/hero-why-spray-foam.jpg"
+  />
+
+  <!-- Comparison Table -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-8 text-center">The Complete Comparison</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-brand-blue text-white">
+              <th class="text-left p-4 font-display font-bold">Property</th>
+              <th class="text-left p-4 font-display font-bold">Spray Foam</th>
+              <th class="text-left p-4 font-display font-bold">Fiberglass</th>
+              <th class="text-left p-4 font-display font-bold">Cellulose</th>
+              <th class="text-left p-4 font-display font-bold">Mineral Wool</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonData.map((row, i) => (
+              <tr class={i % 2 === 0 ? 'bg-neutral-50' : 'bg-white'}>
+                <td class="p-4 font-semibold text-neutral-800 text-sm">{row.property}</td>
+                <td class="p-4 text-sm text-accent-orange font-semibold">{row.sprayFoam}</td>
+                <td class="p-4 text-sm text-neutral-600">{row.fiberglass}</td>
+                <td class="p-4 text-sm text-neutral-600">{row.cellulose}</td>
+                <td class="p-4 text-sm text-neutral-600">{row.mineralWool}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center mt-8">
+        <a href="/contact" class="btn-primary">Get Your Free Estimate</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Oklahoma-Specific Benefits -->
+  <section class="section-padding bg-neutral-50">
+    <div class="container-narrow">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">Built for Oklahoma's Climate</h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto">Oklahoma's extreme weather makes insulation more important here than almost anywhere else in the country.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {oklahomaReasons.map((reason) => (
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+            <h3 class="font-display text-lg font-bold text-brand-blue mb-2">{reason.title}</h3>
+            <p class="text-neutral-600 text-sm">{reason.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- R-Value Cost Analysis -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-6">Cost-Per-Year Analysis</h2>
+        <p class="text-lg text-neutral-600 mb-10">Spray foam costs more upfront, but when you factor in energy savings and replacement costs, it's the cheapest insulation over time.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-neutral-50 rounded-xl p-6 border border-neutral-200">
+            <h3 class="font-display font-bold text-neutral-500 mb-2">Fiberglass Batts</h3>
+            <p class="text-sm text-neutral-600 mb-3">Replace every 15–20 years</p>
+            <p class="text-3xl font-display font-bold text-neutral-700">~$190/yr</p>
+            <p class="text-xs text-neutral-500 mt-2">$3,000 install + $600/yr wasted energy</p>
+          </div>
+          <div class="bg-neutral-50 rounded-xl p-6 border border-neutral-200">
+            <h3 class="font-display font-bold text-neutral-500 mb-2">Blown Cellulose</h3>
+            <p class="text-sm text-neutral-600 mb-3">Settles 15–20%, retreat every 10 yrs</p>
+            <p class="text-3xl font-display font-bold text-neutral-700">~$170/yr</p>
+            <p class="text-xs text-neutral-500 mt-2">$2,500 install + $480/yr wasted energy</p>
+          </div>
+          <div class="bg-accent-orange/5 rounded-xl p-6 border-2 border-accent-orange">
+            <h3 class="font-display font-bold text-accent-orange mb-2">Spray Foam</h3>
+            <p class="text-sm text-neutral-600 mb-3">Lasts lifetime, never replace</p>
+            <p class="text-3xl font-display font-bold text-accent-orange">~$130/yr</p>
+            <p class="text-xs text-neutral-500 mt-2">$6,000 install + $0 wasted energy over 30 yrs</p>
+          </div>
+        </div>
+        <p class="text-xs text-neutral-400 mt-6">*Estimates based on typical 1,500 sq ft attic insulation project in Oklahoma. Actual costs vary.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Myths -->
+  <section class="section-padding bg-neutral-50">
+    <div class="container-narrow">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-8 text-center">Common Myths Debunked</h2>
+        <div class="space-y-6">
+          {myths.map((item) => (
+            <div class="bg-white rounded-xl p-6 border border-neutral-200">
+              <h3 class="font-display font-bold text-red-600 mb-2">Myth: "{item.myth}"</h3>
+              <p class="text-neutral-700"><strong class="text-brand-blue">Fact:</strong> {item.fact}</p>
+            </div>
+          ))}
+        </div>
+        <div class="text-center mt-10">
+          <a href="/contact" class="btn-primary">See What Spray Foam Can Do for Your Home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

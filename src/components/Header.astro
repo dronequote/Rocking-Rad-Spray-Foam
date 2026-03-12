@@ -1,0 +1,85 @@
+---
+const navItems = [
+  { label: 'Services', href: '/services' },
+  { label: 'Service Areas', href: '/service-areas' },
+  { label: 'About', href: '/about' },
+  { label: 'Financing', href: '/financing' },
+  { label: 'Reviews', href: '/reviews' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Blog', href: '/blog' },
+];
+---
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2">
+        <span class="font-display font-extrabold text-xl lg:text-2xl text-brand-blue">
+          Rocking Rad<span class="text-accent-orange"> Spray Foam</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-6">
+        {navItems.map(item => (
+          <a href={item.href} class="text-sm font-medium text-neutral-700 hover:text-brand-blue transition-colors">
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- CTA + Phone -->
+      <div class="hidden lg:flex items-center gap-4">
+        <a href="tel:5803205620" class="text-sm font-bold text-brand-blue hover:text-brand-blue-light">
+          (580) 320-5620
+        </a>
+        <a href="/contact" class="btn-primary text-sm">
+          Free Estimate
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        class="lg:hidden p-2 text-neutral-700"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="lg:hidden hidden pb-4">
+      <nav class="flex flex-col gap-2">
+        {navItems.map(item => (
+          <a href={item.href} class="px-3 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 rounded-lg">
+            {item.label}
+          </a>
+        ))}
+        <hr class="my-2 border-neutral-200" />
+        <a href="tel:5803205620" class="px-3 py-2 text-sm font-bold text-brand-blue">
+          📞 (580) 320-5620
+        </a>
+        <a href="/contact" class="btn-primary text-sm text-center mx-3">
+          Get Your Free Estimate
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+  });
+</script>

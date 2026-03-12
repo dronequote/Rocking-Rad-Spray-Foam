@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import CTASection from '../../components/CTASection.astro';
+
+const categories = ['All', 'Cost', 'Education', 'Process', 'Financing', 'Comparison'];
+
+// Get real posts from content collection (non-draft only)
+let posts: any[] = [];
+try {
+  const collectionPosts = await getCollection('blog', ({ data }) => !data.draft);
+  posts = collectionPosts
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .map(post => ({
+      slug: post.id,
+      title: post.data.title,
+      description: post.data.description,
+      date: post.data.date,
+      category: post.data.category,
+      readTime: post.data.readTime,
+      image: post.data.image,
+    }));
+} catch (e) {
+  // Collection may be empty
+}
+
+// Placeholder articles shown when no real posts exist
+const placeholderArticles = [
+  {
+    title: 'How Much Does Spray Foam Insulation Cost in Oklahoma? (2026)',
+    description: 'Real pricing for Oklahoma spray foam projects — attics, metal buildings, homes. Plus how to claim your 30% federal tax credit.',
+    category: 'Cost',
+    readTime: '8 min read',
+  },
+  {
+    title: 'Open Cell vs. Closed Cell: Which Is Right for Your Project?',
+    description: 'A straightforward comparison of the two spray foam types — where each one works best, what they cost, and how to choose.',
+    category: 'Comparison',
+    readTime: '6 min read',
+  },
+  {
+    title: '5 Signs Your Oklahoma Home Needs Better Insulation',
+    description: 'High energy bills are just the start. Here are 5 warning signs that your insulation is failing — and what to do about it.',
+    category: 'Education',
+    readTime: '5 min read',
+  },
+  {
+    title: 'The Complete Guide to Metal Building Insulation',
+    description: 'Why metal buildings sweat, why fiberglass fails, and why spray foam is the only real solution for Oklahoma shops and barns.',
+    category: 'Education',
+    readTime: '10 min read',
+  },
+  {
+    title: 'Spray Foam Tax Credits: How to Claim Your 30% Back',
+    description: 'The IRA gives you 30% back (up to $1,200) on spray foam insulation. Here\'s exactly how to claim it on your tax return.',
+    category: 'Financing',
+    readTime: '4 min read',
+  },
+];
+
+const displayPosts = posts.length > 0 ? posts : null;
+---
+
+<BaseLayout
+  title="Spray Foam Learning Center | Rocking Rad Spray Foam"
+  description="Expert guides on spray foam insulation costs, comparisons, tax credits, and tips for Oklahoma homeowners and businesses."
+>
+  <HeroSection
+    title="Spray Foam Learning Center"
+    subtitle="Expert guides, real pricing, and practical advice for Oklahoma homeowners and businesses. No jargon, no fluff — just the information you need to make a smart insulation decision."
+    compact
+  />
+
+  <section class="section-padding">
+    <div class="max-w-7xl mx-auto">
+      <!-- Category Filters -->
+      <div class="flex flex-wrap gap-2 mb-8">
+        {categories.map(cat => (
+          <button
+            class="px-4 py-2 rounded-full text-sm font-medium border border-neutral-200 text-neutral-600 hover:border-brand-blue hover:text-brand-blue transition-colors"
+            data-category={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {displayPosts ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayPosts.map(post => (
+            <a href={`/blog/${post.slug}`} class="group block bg-white border border-neutral-200 rounded-xl overflow-hidden hover:shadow-lg transition-all">
+              {post.image && (
+                <div class="aspect-[16/9] bg-neutral-100">
+                  <img src={post.image} alt={post.title} class="w-full h-full object-cover" loading="lazy" />
+                </div>
+              )}
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-xs font-semibold text-accent-orange bg-accent-orange/10 px-2 py-1 rounded-full">{post.category}</span>
+                  <span class="text-xs text-neutral-500">{post.readTime}</span>
+                </div>
+                <h2 class="font-display font-bold text-lg text-brand-blue group-hover:text-brand-blue-light transition-colors mb-2">
+                  {post.title}
+                </h2>
+                <p class="text-sm text-neutral-600 line-clamp-2">{post.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <>
+          <p class="text-center text-neutral-500 mb-8">Expert guides and tips coming soon. Here's what we're working on:</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {placeholderArticles.map(article => (
+              <div class="bg-white border border-neutral-200 rounded-xl p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-xs font-semibold text-accent-orange bg-accent-orange/10 px-2 py-1 rounded-full">{article.category}</span>
+                  <span class="text-xs text-neutral-500">{article.readTime}</span>
+                </div>
+                <h2 class="font-display font-bold text-lg text-brand-blue mb-2">{article.title}</h2>
+                <p class="text-sm text-neutral-600">{article.description}</p>
+                <span class="inline-block mt-4 text-sm text-neutral-400 italic">Coming Soon</span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

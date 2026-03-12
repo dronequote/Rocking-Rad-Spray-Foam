@@ -1,0 +1,13 @@
+{
+  "redirects": [
+    { "source": "/service-page/closed-cell-insulation-1", "destination": "/services/closed-cell-spray-foam", "permanent": true },
+    { "source": "/service-page/open-cell-insulation", "destination": "/services/open-cell-spray-foam", "permanent": true },
+    { "source": "/contact-us", "destination": "/contact", "permanent": true },
+    { "source": "/about-us", "destination": "/about", "permanent": true },
+    { "source": "/our-services", "destination": "/services", "permanent": true },
+    { "source": "/home", "destination": "/", "permanent": true },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/services/residential", "destination": "/services", "permanent": true },
+    { "source": "/services/commercial", "destination": "/services/commercial-insulation", "permanent": true }
+  ]
+}

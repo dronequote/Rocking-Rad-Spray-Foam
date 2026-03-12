@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CTASection from '../components/CTASection.astro';
+import PriceEstimator from '../components/PriceEstimator.tsx';
+
+const title = 'Estimate Your Spray Foam Cost | Rocking Rad';
+const description = 'Get an instant spray foam insulation cost estimate for your Oklahoma project. Enter your details for ballpark pricing, then contact us for an exact quote.';
+---
+
+<BaseLayout title={title} description={description}>
+  <HeroSection
+    title="Estimate Your Spray Foam Cost"
+    subtitle="Get a ballpark price for your insulation project in seconds. For an exact quote, schedule your free on-site estimate."
+    ctaText="Get an Exact Quote"
+    ctaHref="/contact"
+    compact
+  />
+
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="max-w-3xl mx-auto">
+        <!-- Interactive Price Estimator -->
+        <div class="mb-10">
+          <PriceEstimator client:visible />
+        </div>
+
+        <!-- Accuracy Note -->
+        <div class="bg-brand-blue/5 rounded-xl p-6 border border-brand-blue/20 mb-10">
+          <h3 class="font-display text-lg font-bold text-brand-blue mb-2">About This Estimate</h3>
+          <p class="text-neutral-600 text-sm mb-3">This estimator provides <strong>ballpark pricing only</strong>. Actual costs depend on factors that can only be assessed on-site:</p>
+          <ul class="text-sm text-neutral-600 space-y-1 ml-4 list-disc">
+            <li>Accessibility of the area to be sprayed</li>
+            <li>Existing insulation that may need removal</li>
+            <li>Prep work required (masking, protection)</li>
+            <li>Exact dimensions and coverage area</li>
+            <li>Foam type and thickness recommended</li>
+          </ul>
+        </div>
+
+        <!-- Quick Reference Pricing -->
+        <div class="mb-10">
+          <h3 class="font-display text-xl font-bold text-brand-blue mb-6 text-center">Quick Reference Pricing</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white rounded-xl p-5 border border-neutral-200">
+              <h4 class="font-display font-bold text-brand-blue mb-1">Open Cell Spray Foam</h4>
+              <p class="text-2xl font-display font-bold text-accent-orange">$0.44–$0.65</p>
+              <p class="text-xs text-neutral-500">per board foot installed</p>
+              <p class="text-sm text-neutral-600 mt-2">Best for: Attics, interior walls, soundproofing</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-neutral-200">
+              <h4 class="font-display font-bold text-brand-blue mb-1">Closed Cell Spray Foam</h4>
+              <p class="text-2xl font-display font-bold text-accent-orange">$1.00–$1.60</p>
+              <p class="text-xs text-neutral-500">per board foot installed</p>
+              <p class="text-sm text-neutral-600 mt-2">Best for: Metal buildings, crawl spaces, exterior walls</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-neutral-200">
+              <h4 class="font-display font-bold text-brand-blue mb-1">Typical Attic (1,500 sq ft)</h4>
+              <p class="text-2xl font-display font-bold text-accent-orange">$3,600–$8,000</p>
+              <p class="text-xs text-neutral-500">depending on foam type and thickness</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-neutral-200">
+              <h4 class="font-display font-bold text-brand-blue mb-1">Typical Metal Building (30x50)</h4>
+              <p class="text-2xl font-display font-bold text-accent-orange">$6,000–$9,600</p>
+              <p class="text-xs text-neutral-500">2" closed cell on walls and ceiling</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center bg-accent-orange/5 rounded-xl p-8 border border-accent-orange/20">
+          <h3 class="font-display text-xl font-bold text-brand-blue mb-2">Want an Exact Number?</h3>
+          <p class="text-neutral-600 mb-4">Schedule your free on-site estimate. We'll walk your property, assess your needs, and provide a detailed written quote within 24–48 hours.</p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="/contact" class="btn-primary">Schedule Free Estimate</a>
+            <a href="tel:5803205620" class="btn-outline">Call (580) 320-5620</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

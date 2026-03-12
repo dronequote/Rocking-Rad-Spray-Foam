@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CTASection from '../components/CTASection.astro';
+import { faqs } from '../data/faq';
+
+const title = 'FAQ | Spray Foam Insulation Questions';
+const description = 'Get answers to common spray foam insulation questions. Cost, process, types, tax credits, and more. Rocking Rad Spray Foam — Oklahoma\'s trusted contractor.';
+
+const categories = ['All', 'General', 'Cost', 'Process', 'Technical'];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} schema={faqSchema}>
+  <HeroSection
+    title="Frequently Asked Questions"
+    subtitle="Everything you need to know about spray foam insulation, our process, costs, and more."
+    ctaText="Still Have Questions? Contact Us"
+    ctaHref="/contact"
+    backgroundImage="/images/hero-faq.jpg"
+  />
+
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="max-w-3xl mx-auto">
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-wrap gap-2 mb-10">
+          {categories.map((cat) => (
+            <button
+              data-category={cat.toLowerCase()}
+              class={`faq-tab px-4 py-2 rounded-full text-sm font-medium border transition-colors ${cat === 'All' ? 'bg-brand-blue text-white border-brand-blue' : 'bg-white text-neutral-600 border-neutral-300 hover:border-brand-blue hover:text-brand-blue'}`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <!-- FAQ Items -->
+        <div class="space-y-4" id="faq-list">
+          {faqs.map((faq, i) => (
+            <div class="faq-item border border-neutral-200 rounded-xl overflow-hidden" data-category={faq.category.toLowerCase()}>
+              <button
+                class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-neutral-50 transition-colors"
+                aria-expanded="false"
+                aria-controls={`faq-answer-${i}`}
+              >
+                <span class="font-display font-bold text-brand-blue pr-4">{faq.question}</span>
+                <svg class="faq-icon w-5 h-5 text-neutral-400 shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id={`faq-answer-${i}`} class="faq-answer hidden px-5 pb-5">
+                <p class="text-neutral-600">{faq.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-12 bg-brand-blue/5 rounded-xl p-8 border border-brand-blue/20 text-center">
+          <h3 class="font-display text-xl font-bold text-brand-blue mb-2">Didn't Find Your Answer?</h3>
+          <p class="text-neutral-600 mb-4">Our team is happy to answer any questions about your specific project.</p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="/contact" class="btn-primary">Ask Us Directly</a>
+            <a href="tel:5803205620" class="btn-outline">Call (580) 320-5620</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>
+
+<script>
+  // FAQ expand/collapse
+  document.querySelectorAll('.faq-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      const answer = btn.nextElementSibling as HTMLElement;
+      const icon = btn.querySelector('.faq-icon') as HTMLElement;
+      if (answer) answer.classList.toggle('hidden');
+      if (icon) icon.style.transform = expanded ? '' : 'rotate(180deg)';
+    });
+  });
+
+  // Category filtering
+  document.querySelectorAll('.faq-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const category = (tab as HTMLElement).dataset.category;
+
+      // Update active tab styling
+      document.querySelectorAll('.faq-tab').forEach((t) => {
+        t.classList.remove('bg-brand-blue', 'text-white', 'border-brand-blue');
+        t.classList.add('bg-white', 'text-neutral-600', 'border-neutral-300');
+      });
+      tab.classList.remove('bg-white', 'text-neutral-600', 'border-neutral-300');
+      tab.classList.add('bg-brand-blue', 'text-white', 'border-brand-blue');
+
+      // Filter items
+      document.querySelectorAll('.faq-item').forEach((item) => {
+        const el = item as HTMLElement;
+        if (category === 'all' || el.dataset.category === category) {
+          el.style.display = '';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

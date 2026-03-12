@@ -1,17 +1,153 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import StatsBar from '../components/StatsBar.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CTASection from '../components/CTASection.astro';
+import QuoteForm from '../components/QuoteForm.tsx';
+import { services } from '../data/services';
+import { testimonials } from '../data/testimonials';
+import { company } from '../data/company';
+import { cities } from '../data/cities';
 
+const title = 'Spray Foam Insulation Oklahoma | Rocking Rad';
+const description = 'Oklahoma\'s trusted spray foam insulation contractor. Woman-owned, BBB A+ rated. Open cell, closed cell, attic & metal building insulation. Free estimates. (580) 320-5620';
+
+const benefitItems = [
+  { title: 'Cut Energy Bills 30–50%', text: 'Spray foam creates an airtight seal that stops conditioned air from escaping through gaps fiberglass can\'t reach.' },
+  { title: 'Year-Round Comfort', text: 'Eliminate hot and cold spots. Your home stays comfortable whether it\'s 110°F in July or an ice storm in January.' },
+  { title: 'Permanent Solution', text: 'Unlike fiberglass that sags and compresses, spray foam maintains its R-value for the lifetime of your structure.' },
+  { title: 'Stops Moisture & Mold', text: 'Closed cell foam is a built-in vapor barrier. No more condensation on metal buildings or moisture in crawl spaces.' },
+  { title: 'Qualifies for Tax Credits', text: 'The 30% federal tax credit (up to $1,200) through the Inflation Reduction Act can offset a significant portion of your cost.' },
+  { title: 'Increases Property Value', text: 'Energy-efficient homes sell faster and for more. Spray foam is a permanent upgrade that pays dividends at resale.' },
+];
+
+const displayTestimonials = testimonials.slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title={title} description={description}>
+  <div class="pb-20 lg:pb-0">
+    <!-- Hero -->
+    <HeroSection
+      title="Spray Foam Insulation That Pays for Itself"
+      subtitle="Oklahoma's woman-owned, BBB A+ rated insulation contractor. Cut your energy bills 30–50% with professional spray foam installation."
+      ctaText="Get Your Free Estimate"
+      ctaHref="/contact"
+      secondaryCTAText="Call (580) 320-5620"
+      secondaryCTAHref="tel:5803205620"
+      backgroundImage="/images/hero-homepage.jpg"
+    />
+
+    <!-- Stats Bar -->
+    <StatsBar />
+
+    <!-- Services Grid -->
+    <section class="section-padding bg-white">
+      <div class="container-narrow">
+        <div class="text-center mb-12">
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">Our Spray Foam Services</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl mx-auto">From residential attics to commercial metal buildings, we have the right insulation solution for every project.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service) => (
+            <ServiceCard name={service.name} slug={service.slug} description={service.description} />
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <a href="/services" class="btn-secondary">View All Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Spray Foam Benefits -->
+    <section class="section-padding bg-neutral-50">
+      <div class="container-narrow">
+        <div class="text-center mb-12">
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">Why Oklahoma Homeowners Choose Spray Foam</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl mx-auto">Spray foam isn't just insulation — it's an investment that pays you back every month.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {benefitItems.map((item) => (
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+              <h3 class="font-display text-lg font-bold text-brand-blue mb-2">{item.title}</h3>
+              <p class="text-neutral-600 text-sm">{item.text}</p>
+            </div>
+          ))}
+        </div>
+        <div class="text-center mt-10">
+          <a href="/why-spray-foam" class="btn-outline">Learn More About Spray Foam</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section-padding bg-white">
+      <div class="container-narrow">
+        <div class="text-center mb-12">
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">What Our Customers Say</h2>
+          <div class="flex items-center justify-center gap-2 mb-2">
+            <div class="flex text-accent-orange text-xl">★★★★★</div>
+            <span class="text-neutral-600 font-medium">{company.stats.googleRating} Stars</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {displayTestimonials.map((review) => (
+            <div class="bg-neutral-50 rounded-xl p-6 border border-neutral-200">
+              <div class="flex text-accent-orange mb-3">★★★★★</div>
+              <p class="text-neutral-700 text-sm mb-4 italic">"{review.text}"</p>
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  {review.name.charAt(0)}
+                </div>
+                <div>
+                  <p class="font-semibold text-sm text-neutral-800">{review.name}</p>
+                  <p class="text-xs text-neutral-500">{review.source}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <a href="/reviews" class="btn-outline">Read All Reviews</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Areas -->
+    <section class="section-padding bg-neutral-50">
+      <div class="container-narrow">
+        <div class="text-center mb-12">
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">Serving Oklahoma Statewide</h2>
+          <p class="text-lg text-neutral-600 max-w-2xl mx-auto">We provide professional spray foam insulation across Oklahoma. Click your area to learn more.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {cities.map((city) => (
+            <a href={`/service-areas/${city.slug}`} class="bg-white rounded-lg p-4 text-center shadow-sm border border-neutral-200 hover:border-accent-orange hover:shadow-md transition-all">
+              <p class="font-display font-bold text-brand-blue">{city.name}</p>
+              <p class="text-xs text-neutral-500 mt-1">{city.state}</p>
+            </a>
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <a href="/service-areas" class="btn-outline">View All Service Areas</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote Form -->
+    <section id="quote" class="section-padding bg-brand-blue">
+      <div class="container-narrow">
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-8">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">Get Your Free Estimate</h2>
+            <p class="text-lg text-blue-200">Tell us about your project and we'll get back to you within 24 hours with a custom quote.</p>
+          </div>
+          <QuoteForm client:visible />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <CTASection />
+  </div>
+</BaseLayout>

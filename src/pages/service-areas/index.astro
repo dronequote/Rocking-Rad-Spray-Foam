@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import CTASection from '../../components/CTASection.astro';
+import { cities } from '../../data/cities';
+
+const title = 'Service Areas | Spray Foam Insulation Oklahoma';
+const description = 'Rocking Rad Spray Foam serves all of Oklahoma. Ada, OKC, Norman, Tulsa, Shawnee, McAlester, Durant, Ardmore, Stillwater & surrounding areas. Free estimates.';
+
+const allZipCodes = cities.flatMap((city) => city.zipCodes);
+---
+
+<BaseLayout title={title} description={description}>
+  <HeroSection
+    title="Serving Oklahoma Statewide"
+    subtitle="From Ada to Oklahoma City, Tulsa to Durant — we bring professional spray foam insulation to communities across the state."
+    ctaText="Get Your Free Estimate"
+    ctaHref="/contact"
+    backgroundImage="/images/hero-service-areas.jpg"
+  />
+
+  <!-- Cities Grid -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">Our Service Areas</h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto">Click your area to see local spray foam insulation information, pricing, and service details.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {cities.map((city) => (
+          <a href={`/service-areas/${city.slug}`} class="block bg-white rounded-xl p-6 shadow-sm border border-neutral-200 hover:border-accent-orange hover:shadow-md transition-all group">
+            <h3 class="font-display text-xl font-bold text-brand-blue group-hover:text-accent-orange transition-colors mb-2">{city.name}, OK</h3>
+            <p class="text-sm text-neutral-500 mb-2">Pop. {city.population}</p>
+            <p class="text-sm text-neutral-600 mb-3">{city.description}</p>
+            <div class="flex flex-wrap gap-1">
+              {city.zipCodes.slice(0, 3).map((zip) => (
+                <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5 rounded">{zip}</span>
+              ))}
+              {city.zipCodes.length > 3 && (
+                <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5 rounded">+{city.zipCodes.length - 3} more</span>
+              )}
+            </div>
+            <p class="text-accent-orange font-semibold text-sm mt-4 group-hover:translate-x-1 transition-transform">
+              View Details →
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Placeholder -->
+  <section class="section-padding bg-neutral-50">
+    <div class="container-narrow">
+      <div class="text-center mb-8">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand-blue mb-4">Coverage Area</h2>
+        <p class="text-lg text-neutral-600 max-w-2xl mx-auto">Based in Ada, we serve communities across Oklahoma. Don't see your area? Call us — we likely cover it.</p>
+      </div>
+      <div class="bg-neutral-100 rounded-xl aspect-video max-w-4xl mx-auto flex items-center justify-center border border-neutral-200">
+        <div class="text-center text-neutral-500 p-8">
+          <svg class="w-16 h-16 mx-auto mb-4 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <p class="font-display font-bold text-lg mb-1">Oklahoma Service Area Map</p>
+          <p class="text-sm">Serving the entire state from our base in Ada, OK</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All ZIP Codes -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-display text-2xl font-bold text-brand-blue mb-6 text-center">ZIP Codes We Serve</h2>
+        <div class="flex flex-wrap gap-2 justify-center">
+          {allZipCodes.map((zip) => (
+            <span class="text-xs bg-neutral-50 text-neutral-600 px-3 py-1.5 rounded-full border border-neutral-200">{zip}</span>
+          ))}
+        </div>
+        <p class="text-center text-sm text-neutral-500 mt-6">Don't see your ZIP code? <a href="/contact" class="text-accent-orange hover:text-accent-orange-dark font-medium">Contact us</a> — we likely serve your area.</p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

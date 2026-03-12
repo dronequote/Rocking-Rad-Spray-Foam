@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CTASection from '../components/CTASection.astro';
+
+const title = 'Project Gallery | Rocking Rad Spray Foam';
+const description = 'See our spray foam insulation work across Oklahoma. Attic, metal building, pole barn, commercial, and residential projects. Before and after photos.';
+
+const projects = [
+  { title: 'Residential Attic — Ada, OK', type: 'Attic Insulation', foam: 'Open Cell', description: 'Full attic spray foam on a 2,200 sq ft home. Sprayed roof decking at 5.5 inches for R-20. Customer reported 40% reduction in summer energy bills.', image: '/images/gallery/attic-ada.jpg' },
+  { title: 'Metal Shop — Shawnee, OK', type: 'Metal Building', foam: 'Closed Cell', description: '40x60 metal shop insulated with 2" closed cell. Eliminated condensation and created a comfortable year-round workspace.', image: '/images/gallery/metal-shawnee.jpg' },
+  { title: 'Pole Barn — Norman, OK', type: 'Metal Building', foam: 'Closed Cell', description: '30x50 pole barn conversion to workshop. Closed cell on walls and ceiling. Owner now uses it as a woodworking shop year-round.', image: '/images/gallery/pole-barn-norman.jpg' },
+  { title: 'Commercial Office — OKC', type: 'Commercial', foam: 'Open & Closed Cell', description: '5,000 sq ft office renovation. Closed cell on exterior walls, open cell on interior partitions. HVAC costs down 35%.', image: '/images/gallery/commercial-okc.jpg' },
+  { title: 'Crawl Space — McAlester, OK', type: 'Attic Insulation', foam: 'Closed Cell', description: 'Crawl space encapsulation with 2" closed cell. Stopped moisture intrusion and musty odors. Floors above no longer cold in winter.', image: '/images/gallery/crawl-mcalester.jpg' },
+  { title: 'New Construction — Stillwater, OK', type: 'Commercial', foam: 'Closed Cell', description: 'New 3,500 sq ft custom home. Closed cell in exterior walls, open cell in attic. Built to exceed Oklahoma energy code by 30%.', image: '/images/gallery/new-construction-stillwater.jpg' },
+  { title: 'Horse Barn — Durant, OK', type: 'Metal Building', foam: 'Closed Cell', description: '6-stall horse barn insulated with closed cell. Eliminated condensation drip, reduced summer temperatures by 20+ degrees inside.', image: '/images/gallery/horse-barn-durant.jpg' },
+  { title: 'Attic Retrofit — Tulsa, OK', type: 'Attic Insulation', foam: 'Open Cell', description: '1960s ranch home with inadequate blown-in insulation. Sprayed 7 inches of open cell on roof decking. Immediate comfort improvement.', image: '/images/gallery/attic-tulsa.jpg' },
+  { title: 'Warehouse — Ardmore, OK', type: 'Commercial', foam: 'Closed Cell', description: '15,000 sq ft warehouse with temperature-sensitive inventory. Closed cell on metal walls and roof. Energy costs reduced by 45%.', image: '/images/gallery/warehouse-ardmore.jpg' },
+  { title: 'Metal Building Home — Ada, OK', type: 'Metal Building', foam: 'Closed Cell', description: 'Barndominium build-out. Full closed cell envelope transformed a bare metal shell into a comfortable family home.', image: '/images/gallery/barndo-ada.jpg' },
+  { title: 'Bonus Room — OKC', type: 'Attic Insulation', foam: 'Open Cell', description: 'Bonus room above garage was unbearable in summer. Open cell on roof and walls made it the most comfortable room in the house.', image: '/images/gallery/bonus-room-okc.jpg' },
+  { title: 'Restaurant — Norman, OK', type: 'Commercial', foam: 'Open & Closed Cell', description: 'Restaurant renovation with walk-in cooler insulation and dining area comfort upgrade. Kitchen heat no longer invades the dining room.', image: '/images/gallery/restaurant-norman.jpg' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <HeroSection
+    title="Our Work Speaks for Itself"
+    subtitle="Browse real spray foam insulation projects from across Oklahoma. Every project completed to the highest standards."
+    ctaText="Start Your Project"
+    ctaHref="/contact"
+    backgroundImage="/images/hero-gallery.jpg"
+  />
+
+  <section class="section-padding bg-white">
+    <div class="container-narrow">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project) => (
+          <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-neutral-200 hover:shadow-md transition-shadow">
+            <div class="aspect-video bg-neutral-100 relative">
+              <div class="absolute inset-0 flex items-center justify-center text-neutral-400">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-semibold bg-brand-blue/10 text-brand-blue px-2 py-0.5 rounded-full">{project.type}</span>
+                <span class="text-xs font-semibold bg-accent-orange/10 text-accent-orange px-2 py-0.5 rounded-full">{project.foam}</span>
+              </div>
+              <h3 class="font-display font-bold text-brand-blue mb-2">{project.title}</h3>
+              <p class="text-sm text-neutral-600">{project.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <p class="text-neutral-600 mb-4">Want to see your project here? Every job we complete is a project we're proud of.</p>
+        <a href="/contact" class="btn-primary">Get Your Free Estimate</a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

@@ -1,0 +1,124 @@
+---
+const serviceLinks = [
+  { label: 'Open Cell Spray Foam', href: '/services/open-cell-spray-foam' },
+  { label: 'Closed Cell Spray Foam', href: '/services/closed-cell-spray-foam' },
+  { label: 'Attic Insulation', href: '/services/attic-insulation' },
+  { label: 'Metal Building Insulation', href: '/services/metal-building-insulation' },
+  { label: 'Commercial Insulation', href: '/services/commercial-insulation' },
+];
+
+const areaLinks = [
+  { label: 'Ada', href: '/service-areas/ada' },
+  { label: 'Oklahoma City', href: '/service-areas/oklahoma-city' },
+  { label: 'Norman', href: '/service-areas/norman' },
+  { label: 'Tulsa', href: '/service-areas/tulsa' },
+  { label: 'Shawnee', href: '/service-areas/shawnee' },
+  { label: 'McAlester', href: '/service-areas/mcalester' },
+  { label: 'Durant', href: '/service-areas/durant' },
+  { label: 'Ardmore', href: '/service-areas/ardmore' },
+  { label: 'Stillwater', href: '/service-areas/stillwater' },
+];
+
+const companyLinks = [
+  { label: 'About Us', href: '/about' },
+  { label: 'Reviews', href: '/reviews' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Financing', href: '/financing' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<footer class="bg-brand-blue-dark text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <!-- Company Info -->
+      <div>
+        <h3 class="font-display font-bold text-lg mb-4">
+          Rocking Rad<span class="text-accent-orange"> Spray Foam</span>
+        </h3>
+        <p class="text-neutral-300 text-sm mb-4">
+          Oklahoma's trusted spray foam insulation contractor. Woman-owned, minority-owned, BBB A+ rated.
+        </p>
+        <div class="space-y-2 text-sm">
+          <p>
+            <a href="tel:5803205620" class="text-accent-orange-light hover:text-accent-orange font-semibold">
+              (580) 320-5620
+            </a>
+          </p>
+          <p>
+            <a href="mailto:rockingradsprayfoam@gmail.com" class="text-neutral-300 hover:text-white">
+              rockingradsprayfoam@gmail.com
+            </a>
+          </p>
+          <p class="text-neutral-400">Ada, Oklahoma 74820</p>
+          <p class="text-neutral-400">Mon–Fri: 7 AM – 5 PM</p>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="font-display font-bold text-lg mb-4">Services</h3>
+        <ul class="space-y-2">
+          {serviceLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-neutral-300 hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Service Areas -->
+      <div>
+        <h3 class="font-display font-bold text-lg mb-4">Service Areas</h3>
+        <ul class="space-y-2">
+          {areaLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-neutral-300 hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="font-display font-bold text-lg mb-4">Company</h3>
+        <ul class="space-y-2">
+          {companyLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-neutral-300 hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-6">
+          <a href="/contact" class="btn-primary text-sm">
+            Get Your Free Estimate
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-sm text-neutral-400">
+        © {new Date().getFullYear()} Rocking Rad Spray Foam LLC. All rights reserved.
+      </p>
+      <div class="flex items-center gap-4 text-sm text-neutral-400">
+        <span>Woman-Owned</span>
+        <span>•</span>
+        <span>Minority-Owned</span>
+        <span>•</span>
+        <span>BBB A+ Rated</span>
+        <span>•</span>
+        <span>Licensed Home Builders</span>
+      </div>
+    </div>
+  </div>
+</footer>
