@@ -1,5 +1,8 @@
 import { useState, type FormEvent } from 'react';
 
+const LOCATION_ID = 'iv9DRjJPqHFSq3pFsRq';
+const API_URL = 'https://api.leadprospecting.ai/api/public/contact';
+
 const projectTypes = [
   'Attic Insulation',
   'Metal Building / Pole Barn',
@@ -15,17 +18,72 @@ const cities = [
   'McAlester', 'Durant', 'Ardmore', 'Stillwater', 'Other',
 ];
 
+function parseName(fullName: string): { firstName: string; lastName: string } {
+  const parts = fullName.trim().split(/\s+/);
+  if (parts.length === 1) return { firstName: parts[0], lastName: '' };
+  return { firstName: parts[0], lastName: parts.slice(1).join(' ') };
+}
+
+function formatPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length === 10) return `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`;
+  return phone;
+}
+
 export default function QuoteForm() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSending(true);
-    // In production, this would POST to an API endpoint
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setSubmitted(true);
-    setSending(false);
+    setError('');
+
+    const form = new FormData(e.currentTarget);
+    const fullName = (form.get('name') as string) || '';
+    const { firstName, lastName } = parseName(fullName);
+    const phone = (form.get('phone') as string) || '';
+    const email = (form.get('email') as string) || '';
+    const city = (form.get('city') as string) || '';
+    const projectType = (form.get('projectType') as string) || '';
+    const details = (form.get('details') as string) || '';
+
+    const tags = ['website_contact', 'free_estimate'];
+    if (projectType) tags.push(`project_${projectType.toLowerCase().replace(/[\s\/]+/g, '_')}`);
+    if (city) tags.push(`city_${city.toLowerCase().replace(/\s+/g, '_')}`);
+
+    const source = `Website Contact Form — ${projectType || 'General Inquiry'}`;
+
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          locationId: LOCATION_ID,
+          firstName,
+          lastName,
+          email: email || undefined,
+          phone: phone ? formatPhone(phone) : undefined,
+          tags,
+          source,
+          notes: [city, projectType, details].filter(Boolean).join(' | '),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok || data.success) {
+        setSubmitted(true);
+      } else {
+        setError(data.message || 'Something went wrong. Please try again or call us directly.');
+      }
+    } catch {
+      setError('Unable to connect. Please call us at (580) 320-5620.');
+    } finally {
+      setSending(false);
+    }
   }
 
   if (submitted) {
@@ -45,6 +103,12 @@ export default function QuoteForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1">
