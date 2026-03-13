@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AmbassadorDashboard from '../../components/AmbassadorDashboard.tsx';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Ambassador Program', url: '/ambassador' },
+  { name: 'Dashboard', url: '/ambassador/dashboard' },
+];
+---
+
+<BaseLayout
+  title="Ambassador Dashboard | Rocking Rad Spray Foam"
+  description="View your referral stats, share your link, and track your rewards in the Rocking Rad Spray Foam ambassador dashboard."
+  breadcrumbs={breadcrumbs}
+>
+  <section class="py-10 lg:py-16 bg-neutral-50 min-h-[60vh]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <AmbassadorDashboard client:load />
+    </div>
+  </section>
+</BaseLayout>

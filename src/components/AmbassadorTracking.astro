@@ -1,0 +1,77 @@
+---
+/**
+ * Site-wide ambassador referral tracking.
+ * Detects ?ref=slug in the URL, stores attribution in localStorage,
+ * and fires a track-click to the LPAI backend.
+ * Include this in BaseLayout so it runs on every page load.
+ */
+---
+
+<script is:inline>
+(function() {
+  var LOCATION_ID = 'iv9DRjJPqHFSq3pFsRq';
+  var API_URL = 'https://api.leadprospecting.ai/api';
+  var ATTRIBUTION_KEY = 'rrsfAmbassador';
+  var ATTRIBUTION_WINDOW_DAYS = 90;
+
+  // Check for ?ref= parameter
+  var params = new URLSearchParams(window.location.search);
+  var refSlug = params.get('ref');
+
+  if (refSlug) {
+    // Generate or reuse session ID
+    var sessionId = localStorage.getItem(ATTRIBUTION_KEY + '_session');
+    if (!sessionId) {
+      sessionId = 'sess_' + Math.random().toString(36).substring(2) + Date.now().toString(36);
+    }
+
+    // Store attribution data
+    var attribution = {
+      slug: refSlug,
+      sessionId: sessionId,
+      landingPath: window.location.pathname,
+      timestamp: Date.now(),
+      expiry: Date.now() + (ATTRIBUTION_WINDOW_DAYS * 24 * 60 * 60 * 1000),
+    };
+    localStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(attribution));
+    localStorage.setItem(ATTRIBUTION_KEY + '_session', sessionId);
+
+    // Fire track-click to backend (non-blocking)
+    fetch(API_URL + '/ambassador/track-click', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        locationId: LOCATION_ID,
+        ambassadorSlug: refSlug,
+        sessionId: sessionId,
+        path: window.location.pathname,
+        destination: window.location.href,
+      }),
+    }).catch(function() { /* silent fail */ });
+
+    // Clean the URL (remove ?ref= without page reload)
+    if (window.history && window.history.replaceState) {
+      params.delete('ref');
+      var cleanURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
+      window.history.replaceState({}, '', cleanURL);
+    }
+  }
+
+  // Expose helper for forms to grab attribution data
+  window.getAmbassadorAttribution = function() {
+    try {
+      var stored = localStorage.getItem(ATTRIBUTION_KEY);
+      if (!stored) return null;
+      var data = JSON.parse(stored);
+      if (Date.now() > data.expiry) {
+        localStorage.removeItem(ATTRIBUTION_KEY);
+        localStorage.removeItem(ATTRIBUTION_KEY + '_session');
+        return null;
+      }
+      return data;
+    } catch (e) {
+      return null;
+    }
+  };
+})();
+</script>

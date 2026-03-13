@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 
 const LOCATION_ID = 'iv9DRjJPqHFSq3pFsRq';
-const API_URL = 'https://api.leadprospecting.ai/api/public/contact';
+const API_BASE = 'https://api.leadprospecting.ai/api';
 
 const projectTypes = [
   'Attic Insulation',
@@ -31,6 +31,18 @@ function formatPhone(phone: string): string {
   return phone;
 }
 
+declare global {
+  interface Window {
+    getAmbassadorAttribution?: () => {
+      slug: string;
+      sessionId: string;
+      landingPath: string;
+      timestamp: number;
+      expiry: number;
+    } | null;
+  }
+}
+
 export default function QuoteForm() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -50,14 +62,20 @@ export default function QuoteForm() {
     const projectType = (form.get('projectType') as string) || '';
     const details = (form.get('details') as string) || '';
 
+    // Check for ambassador attribution
+    const attribution = window.getAmbassadorAttribution?.() ?? null;
+
     const tags = ['website_contact', 'free_estimate'];
     if (projectType) tags.push(`project_${projectType.toLowerCase().replace(/[\s\/]+/g, '_')}`);
     if (city) tags.push(`city_${city.toLowerCase().replace(/\s+/g, '_')}`);
+    if (attribution) tags.push('ambassador_referral');
 
-    const source = `Website Contact Form — ${projectType || 'General Inquiry'}`;
+    const source = attribution
+      ? `Ambassador Referral (${attribution.slug}) — ${projectType || 'General Inquiry'}`
+      : `Website Contact Form — ${projectType || 'General Inquiry'}`;
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${API_BASE}/public/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -76,6 +94,25 @@ export default function QuoteForm() {
 
       if (response.ok || data.success) {
         setSubmitted(true);
+
+        // Fire ambassador lead tracking (non-blocking)
+        if (attribution && (email || phone)) {
+          fetch(`${API_BASE}/ambassador/track-lead`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              locationId: LOCATION_ID,
+              ambassadorSlug: attribution.slug,
+              leadEmail: email || `${formatPhone(phone)}@phone.placeholder`,
+              leadName: fullName,
+              leadPhone: phone ? formatPhone(phone) : undefined,
+              eventType: 'free_estimate',
+              sessionId: attribution.sessionId,
+              landingPath: attribution.landingPath,
+              attributionMethod: 'cookie',
+            }),
+          }).catch(() => { /* silent fail */ });
+        }
       } else {
         setError(data.message || 'Something went wrong. Please try again or call us directly.');
       }
